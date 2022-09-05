@@ -1,0 +1,50 @@
+@use "../../global" as *;
+.card {
+  padding: 16px;
+  cursor: pointer;
+  max-width: 386px;
+  max-height: 444px;
+  width: 100%;
+  // background: #ffffff;
+
+  .wrapper {
+    height: 412px;
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    .title {
+      @include content(18px, 300, 29px);
+      align-items: center;
+      width: 100%;
+    }
+
+    .price {
+      @include content(18px, 500, 29px);
+      align-items: center;
+    }
+  }
+  .image {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+  }
+  .image:hover {
+    animation: darken 0.5s both;
+  }
+}
+.card:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+@keyframes darken {
+  from {
+    filter: brightness(100%);
+  }
+  to {
+    filter: brightness(80%);
+    transform: scale3d(1, 1, 1);
+  }
+}

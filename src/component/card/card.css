@@ -1,0 +1,63 @@
+.card {
+  padding: 16px;
+  cursor: pointer;
+  max-width: 386px;
+  max-height: 444px;
+  width: 100%;
+}
+.card .wrapper {
+  height: 412px;
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.card .wrapper .title {
+  font-size: 18px;
+  font-weight: 300;
+  height: 29px;
+  align-items: center;
+  width: 100%;
+}
+.card .wrapper .price {
+  font-size: 18px;
+  font-weight: 500;
+  height: 29px;
+  align-items: center;
+}
+.card .image {
+  height: auto;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card .image:hover {
+  -webkit-animation: darken 0.5s both;
+          animation: darken 0.5s both;
+}
+
+.card:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+@-webkit-keyframes darken {
+  from {
+    filter: brightness(100%);
+  }
+  to {
+    filter: brightness(80%);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes darken {
+  from {
+    filter: brightness(100%);
+  }
+  to {
+    filter: brightness(80%);
+    transform: scale3d(1, 1, 1);
+  }
+}/*# sourceMappingURL=card.css.map */
