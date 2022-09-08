@@ -1,7 +1,7 @@
 @use "../../global" as *;
 
-.navBar {
-  position: absolute;
+.nav-bar {
+  position: relative;
   left: 0%;
   right: 0%;
   top: 0%;
@@ -10,7 +10,7 @@
   align-items: center;
 
   height: 80px;
-  .menuItems {
+  .menu-items {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -22,7 +22,7 @@
     left: 101px;
     bottom: 0px;
 
-    .menuItem {
+    .menu-item {
       display: flex;
       align-items: flex-start;
       cursor: pointer;
@@ -35,7 +35,7 @@
       text-align: center;
       text-transform: uppercase;
     }
-    .menuItem.active {
+    .menu-item.active {
       border-bottom: 2px solid $primaryColor;
       color: $primaryColor;
     }
@@ -62,7 +62,7 @@
     height: 40px;
     right: 101px;
     top: 23px;
-    .emptyCart {
+    .empty-cart {
       cursor: pointer;
       width: 20px;
       height: 20px;
@@ -74,14 +74,14 @@
       order: 3;
     }
 
-    .currencySwitcher {
+    .currency-switcher {
       width: 38px;
       height: 29px;
       position: absolute;
       top: 5.5px;
       left: 124px;
       cursor: pointer;
-      .currencyIcon {
+      .currency-icon {
         position: absolute;
         left: 10px;
         font-style: normal;
@@ -92,7 +92,7 @@
         align-items: flex-end;
         color: $secondaryColor;
       }
-      .arrowDown {
+      .arrow-down {
         position: absolute;
         left: 76.47%;
         right: 20.59%;

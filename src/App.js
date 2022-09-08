@@ -4,13 +4,15 @@ import "./App.css";
 import React, { Component } from "react";
 import NavBar from "./component/navBar/NavBar";
 import Card from "./component/card/Card";
+import ProductDisplay from "./component/PDP/ProductDisplay";
 
 export class App extends Component {
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <NavBar />
         <Card />
+        <ProductDisplay />
       </div>
     );
   }

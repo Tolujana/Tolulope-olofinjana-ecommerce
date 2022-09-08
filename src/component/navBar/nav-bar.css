@@ -1,5 +1,5 @@
-.navBar {
-  position: absolute;
+.nav-bar {
+  position: relative;
   left: 0%;
   right: 0%;
   top: 0%;
@@ -8,7 +8,7 @@
   align-items: center;
   height: 80px;
 }
-.navBar .menuItems {
+.nav-bar .menu-items {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -19,7 +19,7 @@
   left: 101px;
   bottom: 0px;
 }
-.navBar .menuItems .menuItem {
+.nav-bar .menu-items .menu-item {
   display: flex;
   align-items: flex-start;
   cursor: pointer;
@@ -32,18 +32,18 @@
   text-align: center;
   text-transform: uppercase;
 }
-.navBar .menuItems .menuItem.active {
+.nav-bar .menu-items .menu-item.active {
   border-bottom: 2px solid #5ece7b;
   color: #5ece7b;
 }
-.navBar .logo {
+.nav-bar .logo {
   position: absolute;
   width: 41px;
   height: 41px;
   left: calc(50% - 20.5px);
   top: calc(50% - 20.5px + 4.5px);
 }
-.navBar .actions {
+.nav-bar .actions {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -56,7 +56,7 @@
   right: 101px;
   top: 23px;
 }
-.navBar .actions .emptyCart {
+.nav-bar .actions .empty-cart {
   cursor: pointer;
   width: 20px;
   height: 20px;
@@ -67,7 +67,7 @@
   bottom: 4.16%;
   order: 3;
 }
-.navBar .actions .currencySwitcher {
+.nav-bar .actions .currency-switcher {
   width: 38px;
   height: 29px;
   position: absolute;
@@ -75,7 +75,7 @@
   left: 124px;
   cursor: pointer;
 }
-.navBar .actions .currencySwitcher .currencyIcon {
+.nav-bar .actions .currency-switcher .currency-icon {
   position: absolute;
   left: 10px;
   font-style: normal;
@@ -86,7 +86,7 @@
   align-items: flex-end;
   color: #1d1f22;
 }
-.navBar .actions .currencySwitcher .arrowDown {
+.nav-bar .actions .currency-switcher .arrow-down {
   position: absolute;
   left: 76.47%;
   right: 20.59%;
@@ -94,4 +94,4 @@
   bottom: 38.75%;
   width: 6px;
   height: 3px;
-}/*# sourceMappingURL=navBar.css.map */
+}/*# sourceMappingURL=nav-bar.css.map */

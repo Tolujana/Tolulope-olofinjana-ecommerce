@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./navbar.css";
+import "./nav-bar.css";
 import cart from "../../assets/vector/cart.svg";
 import logo from "../../assets/vector/a-logo.svg";
 import arrowDown from "../../assets/vector/arrowDown.svg";
@@ -12,7 +12,7 @@ export class NavBar extends Component {
       shouldShowCart: false,
     };
     this.handleClick = (e) => {
-      let menuItems = document.querySelectorAll(".menuItem");
+      let menuItems = document.querySelectorAll(".menu-item");
       menuItems.forEach((menu) => {
         menu.classList.remove("active");
       });
@@ -22,25 +22,25 @@ export class NavBar extends Component {
 
   render() {
     return (
-      <div className="navBar">
-        <div className="menuItems">
-          <div className="menuItem" onClick={this.handleClick}>
+      <div className="nav-bar">
+        <div className="menu-items">
+          <div className="menu-item" onClick={this.handleClick}>
             Women
           </div>
-          <div className="menuItem" onClick={this.handleClick}>
-            CHild
+          <div className="menu-item" onClick={this.handleClick}>
+            Child
           </div>
-          <div className="menuItem" onClick={this.handleClick}>
+          <div className="menu-item" onClick={this.handleClick}>
             Men
           </div>
         </div>
         <img src={logo} alt="" className="logo" />
         <div className="actions">
-          <div className="currencySwitcher">
-            <span className="currencyIcon">$</span>
-            <img src={arrowDown} alt="" className="arrowDown" />
+          <div className="currency-switcher">
+            <span className="currency-icon">$</span>
+            <img src={arrowDown} alt="" className="arrow-down" />
           </div>
-          <div className="emptyCart">
+          <div className="empty-cart">
             <img src={cart} alt="" className="cart" />
           </div>
         </div>

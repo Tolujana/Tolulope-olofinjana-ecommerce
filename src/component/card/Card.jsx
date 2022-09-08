@@ -18,7 +18,7 @@ export class Card extends Component {
         <div className="wrapper">
           <img src={image} alt="" className="image" />
           <div className="content">
-            <div className="title"></div>
+            <div className="title">Appolo shirth</div>
             <div className="price">
               <span className="currency">$</span>
               50.00

@@ -11,3 +11,15 @@ body {
 }
 
 
+h2{
+font-weight: 600;
+font-size: 30px;
+line-height: 27px;
+}
+h1{
+  
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+
+}

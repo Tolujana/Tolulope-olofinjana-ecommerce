@@ -1,35 +1,36 @@
 .card {
-  padding: 16px;
   cursor: pointer;
-  max-width: 386px;
+  width: 386px;
   max-height: 444px;
-  width: 100%;
 }
 .card .wrapper {
   height: 412px;
+  margin: 16px;
   position: relative;
   display: flex;
-  width: 100%;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 }
-.card .wrapper .title {
+.card .wrapper .content {
+  display: flex;
+  flex-direction: column;
+}
+.card .wrapper .content .title {
   font-size: 18px;
   font-weight: 300;
   height: 29px;
   align-items: center;
-  width: 100%;
 }
-.card .wrapper .price {
+.card .wrapper .content .price {
   font-size: 18px;
   font-weight: 500;
   height: 29px;
   align-items: center;
 }
 .card .image {
-  height: auto;
-  width: 100%;
+  height: 330px;
+  width: 354px;
   -o-object-fit: cover;
      object-fit: cover;
 }
