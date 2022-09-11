@@ -3,6 +3,11 @@ import "./nav-bar.css";
 import cart from "../../assets/vector/cart.svg";
 import logo from "../../assets/vector/a-logo.svg";
 import arrowDown from "../../assets/vector/arrowDown.svg";
+import { Query } from "@apollo/client/react/components";
+import { getMenuItems } from "../../utils/queries";
+import { Link } from "react-router-dom";
+import QueryComponent from "../QueryComponent";
+
 export class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +15,9 @@ export class NavBar extends Component {
     this.state = {
       shouldShowSwitcher: false,
       shouldShowCart: false,
+      error: false,
+      loading: false,
+      data: "free",
     };
     this.handleClick = (e) => {
       let menuItems = document.querySelectorAll(".menu-item");
@@ -18,21 +26,26 @@ export class NavBar extends Component {
       });
       e.target.classList.add("active");
     };
+    this.loadData = (data) => {
+      const { categories } = data;
+
+      return categories.map((category) => (
+        <Link className="link" to={`/category/${category.name}`}>
+          <div className="menu-item" onClick={this.handleClick}>
+            {category.name}
+          </div>
+        </Link>
+      ));
+    };
   }
+
+  componentDidUpdate() {}
 
   render() {
     return (
       <div className="nav-bar">
         <div className="menu-items">
-          <div className="menu-item" onClick={this.handleClick}>
-            Women
-          </div>
-          <div className="menu-item" onClick={this.handleClick}>
-            Child
-          </div>
-          <div className="menu-item" onClick={this.handleClick}>
-            Men
-          </div>
+          <QueryComponent query={getMenuItems} loadData={this.loadData} />{" "}
         </div>
         <img src={logo} alt="" className="logo" />
         <div className="actions">

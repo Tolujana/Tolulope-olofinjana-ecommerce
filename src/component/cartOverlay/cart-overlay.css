@@ -1,0 +1,8 @@
+.cart-wrapper {
+  display: flex;
+  width: 325px;
+  height: 677px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: solid black;
+}/*# sourceMappingURL=cart-overlay.css.map */

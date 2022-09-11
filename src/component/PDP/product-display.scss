@@ -1,20 +1,17 @@
 @use "../../global" as *;
 
 .product-wrapper {
-  max-width: 1002px;
-  margin-top: 80px;
-  margin-left: 100px;
-
+  max-width: 1121px;
   display: flex;
   .product-thumbnails {
     display: flex;
     flex-direction: column;
     width: 79px;
-
-    margin-right: 14.58px;
-    .image {
+    margin-right: 40px;
+    .thumbnail {
       margin-bottom: 32.39px;
       height: 80px;
+      width: 100%;
     }
   }
   .product-description {
@@ -63,7 +60,12 @@
 
   .product-image {
     width: 610px;
-    height: 510px;
+    height: 511px;
+  }
+  .image {
     object-fit: cover;
+    width: 100%;
+    max-height: 511px;
+    //max-height: 511px;
   }
 }

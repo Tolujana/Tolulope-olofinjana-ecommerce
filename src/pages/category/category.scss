@@ -1,0 +1,11 @@
+.category-wrapper {
+  width: 100%;
+  .category-name {
+    margin: 80px 0px 103px 101px;
+  }
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 100px;
+  }
+}

@@ -12,9 +12,9 @@ export class ProductDisplay extends Component {
     return (
       <div className="product-wrapper">
         <div className="product-thumbnails">
-          <img src={image} alt="" className="image" />
-          <img src={image} alt="" className="image" />
-          <img src={image} alt="" className="image" />
+          <img src={image} alt="" className="thumbnail" />
+          <img src={image} alt="" className="thumbnail" />
+          <img src={image} alt="" className="thumbnail" />
         </div>
 
         <div className="product-image">

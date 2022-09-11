@@ -1,0 +1,11 @@
+.category-wrapper {
+  width: 100%;
+}
+.category-wrapper .category-name {
+  margin: 80px 0px 103px 101px;
+}
+.category-wrapper .items {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 100px;
+}/*# sourceMappingURL=category.css.map */

@@ -21,19 +21,21 @@
     height: 56px;
     left: 101px;
     bottom: 0px;
-
-    .menu-item {
-      display: flex;
-      align-items: flex-start;
-      cursor: pointer;
-      height: 100%;
-      padding: 0px 16px;
-      border-bottom: 2px solid transparent;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      text-align: center;
-      text-transform: uppercase;
+    .link {
+      text-decoration: none;
+      .menu-item {
+        display: flex;
+        align-items: flex-start;
+        cursor: pointer;
+        height: 100%;
+        padding: 0px 16px;
+        border-bottom: 2px solid transparent;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+        text-transform: uppercase;
+      }
     }
     .menu-item.active {
       border-bottom: 2px solid $primaryColor;

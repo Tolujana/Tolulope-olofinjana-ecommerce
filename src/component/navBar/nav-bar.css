@@ -19,7 +19,10 @@
   left: 101px;
   bottom: 0px;
 }
-.nav-bar .menu-items .menu-item {
+.nav-bar .menu-items .link {
+  text-decoration: none;
+}
+.nav-bar .menu-items .link .menu-item {
   display: flex;
   align-items: flex-start;
   cursor: pointer;
