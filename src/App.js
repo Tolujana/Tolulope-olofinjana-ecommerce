@@ -17,12 +17,13 @@ export class App extends Component {
         <div className="wrapper"></div>
         <BrowserRouter>
           <NavBar />
-          <Card />
+          {/* <Card />
           <ProductDisplay />
-          <CartOverlay />
+          <CartOverlay /> */}
           <Routes>
             <Route path="/" element={<Category category="home" />} />
-            <Route path="/category/:id" element={<Category />} />
+            <Route path="/category/:category" element={<Category />} />
+            <Route path="/product/:id" element={<ProductDisplay />} />
           </Routes>
         </BrowserRouter>
       </>

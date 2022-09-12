@@ -16,12 +16,14 @@ export class Card extends Component {
     return (
       <div className="card">
         <div className="wrapper">
-          <img src={image} alt="" className="image" />
+          <div className="in-stock">
+            {this.props.inStock ? "" : "OUT OF STOCK"}
+          </div>
+          <img src={this.props.image} alt="" className="image" />
           <div className="content">
-            <div className="title">Appolo shirth</div>
+            <div className="title">{this.props.name}</div>
             <div className="price">
-              <span className="currency">$</span>
-              50.00
+              <span className="currency">{`${this.props.symbol} ${this.props.amount}`}</span>
             </div>
           </div>
         </div>

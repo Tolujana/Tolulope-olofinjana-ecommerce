@@ -9,15 +9,14 @@ export const getMenuItems = gql`
   }
 `;
 
-export const getCategoryItems = (id) => gql`
-  {
-    category(input: { title: "${id}" }) {
+export const getCategoryItems = gql`
+  query category($input: CategoryInput!) {
+    category(input: $input) {
       products {
         id
         name
         inStock
         gallery
-        description
         category
         prices {
           currency {
@@ -25,6 +24,33 @@ export const getCategoryItems = (id) => gql`
           }
           amount
         }
+      }
+    }
+  }
+`;
+
+export const getProducts = gql`
+  query product($id: String!) {
+    product(id: $id) {
+      id
+      name
+      inStock
+      gallery
+      description
+      category
+      attributes {
+        id
+        name
+        items {
+          displayValue
+          id
+        }
+      }
+      prices {
+        currency {
+          symbol
+        }
+        amount
       }
     }
   }

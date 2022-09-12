@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import "./product-display.css";
 import image from "../../assets/images/god-in-control.png";
+import QueryComponent from "../QueryComponent";
+import { getProducts } from "../../utils/queries";
 
 export class ProductDisplay extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = { id: "" };
+  }
+
+  componentDidUpdate() {
+    const { id } = this.props.params;
+    if (id !== this.state.category) {
+      this.setState({ id: id });
+    }
   }
   render() {
     return (
       <div className="product-wrapper">
+        <QueryComponent query={getProducts} />
         <div className="product-thumbnails">
           <img src={image} alt="" className="thumbnail" />
           <img src={image} alt="" className="thumbnail" />

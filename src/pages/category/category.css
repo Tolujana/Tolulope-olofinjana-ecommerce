@@ -7,5 +7,10 @@
 .category-wrapper .items {
   display: flex;
   flex-wrap: wrap;
-  margin-right: 100px;
+  row-gap: 103px;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+  margin-left: 100px;
+  max-width: 1238px;
+  justify-content: flex-start;
 }/*# sourceMappingURL=category.css.map */

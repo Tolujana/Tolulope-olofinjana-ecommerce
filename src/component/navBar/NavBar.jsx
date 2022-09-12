@@ -31,7 +31,10 @@ export class NavBar extends Component {
 
       return categories.map((category) => (
         <Link className="link" to={`/category/${category.name}`}>
-          <div className="menu-item" onClick={this.handleClick}>
+          <div
+            className={`menu-item ${category.name === "all" ? "active" : ""}`}
+            onClick={this.handleClick}
+          >
             {category.name}
           </div>
         </Link>
