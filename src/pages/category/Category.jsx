@@ -37,6 +37,7 @@ class Category extends Component {
   componentDidMount() {}
   componentDidUpdate() {
     const { category } = this.props.params;
+    console.log(this.props.params);
     if (category !== this.state.category) {
       this.setState({ category: category || "all" });
     }
