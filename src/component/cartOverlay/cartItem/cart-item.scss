@@ -1,0 +1,27 @@
+.cart-item {
+  border: black;
+
+  display: flex;
+  width: 100%;
+  height: 190px;
+
+  .item-image {
+    width: 121px;
+
+    .images {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .item-count {
+    width: 36px;
+    background-color: blue;
+  }
+  .item-desc {
+    width: 136px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+  }
+}
