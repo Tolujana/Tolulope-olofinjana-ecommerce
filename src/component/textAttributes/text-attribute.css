@@ -1,0 +1,23 @@
+.attribute-name {
+  margin-top: 43px;
+}
+
+.attribute {
+  margin-top: 8px;
+  display: flex;
+  height: 45px;
+}
+.attribute .option {
+  border: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63px;
+  margin-right: 12px;
+  height: 100%;
+  cursor: pointer;
+}
+.attribute .option.selected {
+  background-color: black;
+  color: white;
+}/*# sourceMappingURL=text-attribute.css.map */

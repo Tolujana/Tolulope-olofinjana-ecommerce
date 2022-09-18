@@ -1,0 +1,26 @@
+.options {
+  display: flex;
+}
+.options .grey-border {
+  border: 1px solid #cccccc;
+}
+.options .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  margin-right: 12px;
+  height: 36px;
+  cursor: pointer;
+}
+.options .option .content {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.options .option .content .White {
+  border: 1px solid whitesmoke;
+}
+.options .option.selected {
+  border: 1px solid #5ece7b;
+}/*# sourceMappingURL=swatch-attribute.css.map */

@@ -3,13 +3,16 @@ body {
   padding:0;
   max-width: 1440px;
   width:100%;
+  
+}
+*{
+
   box-sizing:border-box;
   font-family: 'Raleway', sans-serif;
   color:  #1D1F22;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 h2{
 font-weight: 600;

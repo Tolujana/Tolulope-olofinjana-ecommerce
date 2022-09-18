@@ -1,0 +1,28 @@
+.options {
+  display: flex;
+  .grey-border {
+    border: 1px solid #cccccc;
+  }
+  .option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    margin-right: 12px;
+    height: 36px;
+    cursor: pointer;
+
+    .content {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+    }
+    .content .White {
+      border: 1px solid whitesmoke;
+    }
+  }
+
+  .option.selected {
+    border: 1px solid #5ece7b;
+  }
+}

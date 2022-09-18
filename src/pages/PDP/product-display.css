@@ -12,6 +12,8 @@
   margin-bottom: 32.39px;
   height: 80px;
   width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .product-wrapper .product-description {
   width: 292px;
@@ -26,11 +28,16 @@
 .product-wrapper .product-description .size {
   margin-top: 43px;
 }
-.product-wrapper .product-description .sizes {
+.product-wrapper .product-description .attribute {
   margin-top: 8px;
+  display: flex;
   height: 45px;
 }
-.product-wrapper .product-description .sizes .size-option {
+.product-wrapper .product-description .attribute .option {
+  border: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 63px;
   margin-right: 12px;
   height: 100%;

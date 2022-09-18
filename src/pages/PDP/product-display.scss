@@ -12,6 +12,7 @@
       margin-bottom: 32.39px;
       height: 80px;
       width: 100%;
+      object-fit: cover;
     }
   }
   .product-description {
@@ -26,11 +27,16 @@
     .size {
       margin-top: 43px;
     }
-    .sizes {
+    .attribute {
       margin-top: 8px;
+      display: flex;
 
       height: 45px;
-      .size-option {
+      .option {
+        border: solid 1px black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 63px;
         margin-right: 12px;
         height: 100%;

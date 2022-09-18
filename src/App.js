@@ -5,7 +5,7 @@ import { useQuery, gql } from "@apollo/client";
 import React, { Component } from "react";
 import NavBar from "./component/navBar/NavBar";
 import Card from "./component/card/Card";
-import ProductDisplay from "./component/PDP/ProductDisplay";
+import ProductDisplay from "./pages/PDP/ProductDisplay";
 import { CartOverlay } from "./component/cartOverlay/CartOverlay";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Category from "./pages/category/Category";

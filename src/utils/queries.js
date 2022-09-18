@@ -41,6 +41,7 @@ export const getProductDetails = gql`
       attributes {
         id
         name
+        type
         items {
           displayValue
           id
