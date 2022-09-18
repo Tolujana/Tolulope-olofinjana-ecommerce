@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./product-display.css";
-import QueryComponent from "../../component/QueryComponent";
+import QueryComponent from "../../component/queryComponent/QueryComponent";
 import { getProductDetails } from "../../utils/queries";
 import { withParams } from "../../utils/HOCs";
-import TextAttribute from "../../component/textAttributes/TextAttribute";
-import SwatchAttribute from "../../component/swatchAttribute/SwatchAttribute";
+import TextAttribute from "./textAttributes/TextAttribute";
+import SwatchAttribute from "./swatchAttribute/SwatchAttribute";
 
 class ProductDisplay extends Component {
   constructor(props) {

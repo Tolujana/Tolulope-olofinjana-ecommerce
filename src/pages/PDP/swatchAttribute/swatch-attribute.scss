@@ -1,3 +1,5 @@
+@use "../../global";
+
 .options {
   display: flex;
   .grey-border {
@@ -23,6 +25,6 @@
   }
 
   .option.selected {
-    border: 1px solid #5ece7b;
+    border: 1px solid $primaryColor;
   }
 }

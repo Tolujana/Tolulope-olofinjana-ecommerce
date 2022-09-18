@@ -19,7 +19,7 @@ export class App extends Component {
           <NavBar />
           {/* <Card />
           <ProductDisplay />
-          <CartOverlay /> */}
+          */}
           <Routes>
             <Route path="/" element={<Category category="home" />} />
             <Route path="/category/:category" element={<Category />} />

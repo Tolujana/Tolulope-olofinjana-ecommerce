@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./category.css";
 import { withParams } from "../../utils/HOCs";
-import QueryComponent from "../../component/QueryComponent";
+import QueryComponent from "../../component/queryComponent/QueryComponent";
 import { getCategoryItems } from "../../utils/queries";
 import Card from "../../component/card/Card";
 import { Link } from "react-router-dom";
@@ -36,9 +36,8 @@ class Category extends Component {
 
   componentDidMount() {
     const { category } = this.props.params;
-    if (category !== this.state.category) {
-      this.setState({ category: category || "all" });
-    }
+
+    this.setState({ category: category });
   }
   componentDidUpdate() {
     const { category } = this.props.params;

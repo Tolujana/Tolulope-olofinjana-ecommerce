@@ -97,4 +97,10 @@
   bottom: 38.75%;
   width: 6px;
   height: 3px;
+}
+.nav-bar .carted {
+  position: absolute;
+  z-index: 999;
+  left: 1043px;
+  top: 78px;
 }/*# sourceMappingURL=nav-bar.css.map */

@@ -6,7 +6,8 @@ import arrowDown from "../../assets/vector/arrowDown.svg";
 import { Query } from "@apollo/client/react/components";
 import { getMenuItems } from "../../utils/queries";
 import { Link } from "react-router-dom";
-import QueryComponent from "../QueryComponent";
+import QueryComponent from "../queryComponent/QueryComponent";
+import CartOverlay from "../cartOverlay/CartOverlay";
 
 export class NavBar extends Component {
   constructor(props) {
@@ -59,6 +60,9 @@ export class NavBar extends Component {
           <div className="empty-cart">
             <img src={cart} alt="" className="cart" />
           </div>
+        </div>
+        <div className="carted">
+          <CartOverlay />
         </div>
       </div>
     );

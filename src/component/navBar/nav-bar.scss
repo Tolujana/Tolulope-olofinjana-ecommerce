@@ -64,6 +64,7 @@
     height: 40px;
     right: 101px;
     top: 23px;
+
     .empty-cart {
       cursor: pointer;
       width: 20px;
@@ -104,5 +105,11 @@
         height: 3px;
       }
     }
+  }
+  .carted {
+    position: absolute;
+    z-index: 999;
+    left: 1043px;
+    top: 78px;
   }
 }
