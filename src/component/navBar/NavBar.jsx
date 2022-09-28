@@ -12,21 +12,29 @@ import CartOverlay from "../cartOverlay/CartOverlay";
 export class NavBar extends Component {
   constructor(props) {
     super(props);
-
+    this.menu = React.createRef();
+    this.cartItem = React.createRef();
     this.state = {
       shouldShowSwitcher: false,
-      shouldShowCart: false,
+      showCart: false,
       error: false,
       loading: false,
       data: "free",
     };
-    this.handleClick = (e) => {
-      let menuItems = document.querySelectorAll(".menu-item");
+    this.switchMenu = (e) => {
+      //instead of document.queryselector, use ref.queryselector  instead
+      let menuItems = this.menu.current.querySelectorAll(".menu-item");
+
       menuItems.forEach((menu) => {
         menu.classList.remove("active");
       });
       e.target.classList.add("active");
     };
+
+    this.toggleCart = (e) => {
+      this.setState({ showCart: !this.state.showCart });
+    };
+
     this.loadData = (data) => {
       const { categories } = data;
 
@@ -34,7 +42,8 @@ export class NavBar extends Component {
         <Link className="link" to={`/category/${category.name}`}>
           <div
             className={`menu-item ${category.name === "all" ? "active" : ""}`}
-            onClick={this.handleClick}
+            onClick={this.switchMenu}
+            key={category.name}
           >
             {category.name}
           </div>
@@ -48,7 +57,7 @@ export class NavBar extends Component {
   render() {
     return (
       <div className="nav-bar">
-        <div className="menu-items">
+        <div ref={this.menu} className="menu-items">
           <QueryComponent query={getMenuItems} loadData={this.loadData} />{" "}
         </div>
         <img src={logo} alt="" className="logo" />
@@ -57,11 +66,15 @@ export class NavBar extends Component {
             <span className="currency-icon">$</span>
             <img src={arrowDown} alt="" className="arrow-down" />
           </div>
-          <div className="empty-cart">
-            <img src={cart} alt="" className="cart" />
+          <div
+            className="empty-cart"
+            ref={this.cartItem}
+            value={this.state.showCart}
+          >
+            <img src={cart} alt="" className="cart" onClick={this.toggleCart} />
           </div>
         </div>
-        <div className="carted">
+        <div className={`cart-items ${this.state.showCart ? "" : "none"}`}>
           <CartOverlay />
         </div>
       </div>

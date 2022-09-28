@@ -18,7 +18,10 @@ export class CartOverlay extends Component {
             <CartItem />
           </div>
         </div>
-        <div className="total">total</div>
+        <div className="total-detail">
+          <div className="total">Total</div>
+          <div className="amount">200.00</div>
+        </div>
         <div className="buttons">
           <button className="view-bag">View bag</button>
           <button className="check-out">Check Out</button>

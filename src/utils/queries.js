@@ -18,6 +18,13 @@ export const getCategoryItems = gql`
         inStock
         gallery
         category
+        attributes {
+          name
+          items {
+            displayValue
+          }
+        }
+
         prices {
           currency {
             symbol
@@ -38,6 +45,7 @@ export const getProductDetails = gql`
       gallery
       description
       category
+      brand
       attributes {
         id
         name

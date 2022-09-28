@@ -9,10 +9,13 @@
     width: 79px;
     margin-right: 40px;
     .thumbnail {
+      cursor: pointer;
+      border: 0.5px solid #cccccc;
       margin-bottom: 32.39px;
       height: 80px;
       width: 100%;
       object-fit: cover;
+      object-position: top;
     }
   }
   .product-description {
@@ -62,6 +65,10 @@
     .add-to-cart {
       margin-top: 20px;
     }
+    .details {
+      margin-top: 40px;
+    }
+    }
   }
 
   .product-image {
@@ -71,7 +78,8 @@
   .image {
     object-fit: cover;
     width: 100%;
-    max-height: 511px;
-    //max-height: 511px;
+    height: auto;
+    object-position: top;
+    // max-height: 511px;
   }
 }

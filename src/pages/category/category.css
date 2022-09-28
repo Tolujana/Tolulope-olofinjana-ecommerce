@@ -13,4 +13,7 @@
   margin-left: 100px;
   max-width: 1238px;
   justify-content: flex-start;
+}
+.category-wrapper .link {
+  text-decoration: none;
 }/*# sourceMappingURL=category.css.map */

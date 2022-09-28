@@ -1,14 +1,16 @@
 @use "../../global" as *;
 
 .nav-bar {
-  position: relative;
+  position: sticky;
   left: 0%;
   right: 0%;
   top: 0%;
   bottom: 0%;
   display: flex;
   align-items: center;
-
+  z-index: 1000;
+  background-color: white;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
   height: 80px;
   .menu-items {
     display: flex;
@@ -106,10 +108,13 @@
       }
     }
   }
-  .carted {
+  .cart-items {
     position: absolute;
     z-index: 999;
     left: 1043px;
     top: 78px;
+  }
+  .none {
+    display: none;
   }
 }

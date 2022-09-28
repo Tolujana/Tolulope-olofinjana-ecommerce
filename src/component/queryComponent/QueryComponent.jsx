@@ -6,16 +6,12 @@ export class QueryComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { query: this.props.query };
+    this.state = { query: "" };
   }
 
   render() {
     return (
-      <Query
-        query={this.state.query}
-        loadData={this.props.data}
-        variables={this.props.variables}
-      >
+      <Query query={this.props.query} variables={this.props.variables}>
         {({ loading, error, data }) => {
           if (loading) {
             return <div className="loading">Loading....</div>;

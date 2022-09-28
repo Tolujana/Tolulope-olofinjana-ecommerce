@@ -5,11 +5,13 @@ import "./text-attribute.css";
 class TextAttribute extends Component {
   constructor(props) {
     super(props);
-
+    this.option = React.createRef();
     this.state = { attribute: "" };
 
     this.handleClick = (e) => {
-      let options = document.querySelectorAll(".option");
+      //query parent container  for options instead of document. this is to prevent selection of other options under other attribute
+      let options = this.option.current.querySelectorAll(`.option`);
+
       options.forEach((option) => {
         option.classList.remove("selected");
       });
@@ -18,7 +20,6 @@ class TextAttribute extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.attribute);
     this.setState({ attribute: this.props.attribute });
   }
   render() {
@@ -26,16 +27,28 @@ class TextAttribute extends Component {
     return (
       <div>
         <div className="attribute-name">{id}</div>
-        <div className={`${name} attribute`}>
-          {items.map((item) => (
-            <div
-              onClick={this.handleClick}
-              key={item.id}
-              className={` ${item.id} option `}
-            >
-              {item.displayValue}
-            </div>
-          ))}
+        <div ref={this.option} className={`${name} attribute`}>
+          {name !== "Size"
+            ? items.map((item) => (
+                <div
+                  onClick={this.handleClick}
+                  key={item.id}
+                  value={item.id}
+                  className={`${name} option `}
+                >
+                  {item.displayValue}
+                </div>
+              ))
+            : items.map((item) => (
+                <div
+                  onClick={this.handleClick}
+                  key={item.id}
+                  value={item.id}
+                  className={`${name} option `}
+                >
+                  {item.displayValue[0]}
+                </div>
+              ))}
         </div>
       </div>
     );

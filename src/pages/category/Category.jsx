@@ -28,6 +28,8 @@ class Category extends Component {
             symbol={product.prices[0].currency.symbol}
             amount={product.prices[0].amount}
             inStock={product.inStock}
+            brand={product.brand}
+            attribute={product.attributes}
           />
         </Link>
       ));
@@ -37,11 +39,11 @@ class Category extends Component {
   componentDidMount() {
     const { category } = this.props.params;
 
-    this.setState({ category: category });
+    this.setState({ category: category || "all" });
   }
   componentDidUpdate() {
     const { category } = this.props.params;
-    if (category !== this.state.category) {
+    if (category !== this.state.category && category !== undefined) {
       this.setState({ category: category || "all" });
     }
   }
