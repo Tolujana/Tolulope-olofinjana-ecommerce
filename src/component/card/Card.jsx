@@ -1,23 +1,61 @@
 import React, { Component } from "react";
 import "./card.css";
 import { ReactComponent as Cart } from "../../assets/vector/cart.svg";
-import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "../../Redux/cartSlice";
+import { connect } from "react-redux";
+import { addProduct, removeProduct } from "../../Redux/cartSlice";
+
+const mapStateToProps = (state) => {
+  return {
+    cartItem: state,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  //if cart is does not include item, add item
+  const remove = (payload) => dispatch(removeProduct(payload));
+  const add = (payload) => dispatch(addProduct(payload));
+  return {
+    addProduct: add,
+    removeProduct: remove,
+  };
+};
 
 export class Card extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = { addToCart: false };
+
+    this.addItem = (e) => {
+      e.preventDefault();
+      const shouldAddToCart =
+        this.props?.cartItem?.product?.items[this.props.id];
+
+      if (shouldAddToCart !== undefined) {
+        this.props.removeProduct(this.props.id);
+      } else {
+        const { attribute } = this.props;
+        // this is to set default attribute for product item
+        const defaultAttribute = attribute.map((attribute) => {
+          const { name, items } = attribute;
+          return { [name]: items?.displayValue };
+        });
+
+        const payload = {
+          id: this.props.id,
+          image: this.props.image,
+          amount: 1,
+          defaultAttribute,
+        };
+
+        this.props.addProduct(payload);
+      }
+    };
   }
-  componentDidMount() {
-    console.log(this.props.attribute);
-  }
+  componentDidMount() {}
 
   render() {
-    const addItem = (e) => {
-      e.preventDefault();
-    };
+    console.log(this.props);
     return (
       <div className="card">
         <div className="wrapper">
@@ -32,7 +70,11 @@ export class Card extends Component {
             <div className="badge">{this.props.brand}</div>
             <img src={this.props.image} alt="" className="picture" />
             <div className="cart">
-              <Cart className="basket" onClick={addItem} />
+              <Cart
+                className="basket"
+                onClick={this.addItem}
+                value={this.state.addToCart}
+              />
             </div>
           </div>
           <div className="content">
@@ -47,4 +89,4 @@ export class Card extends Component {
   }
 }
 
-export default Card;
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

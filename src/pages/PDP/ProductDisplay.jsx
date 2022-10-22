@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DOMPurify, { sanitize } from "dompurify";
+import { sanitize } from "dompurify";
 
 import "./product-display.css";
 import QueryComponent from "../../component/queryComponent/QueryComponent";
@@ -26,7 +26,6 @@ class ProductDisplay extends Component {
       const { attributes } = product;
       // split product name so it can be displayed on multiple lines
       const [name, ...otherNames] = product.name.split(" ");
-      //this is to make product description avaialabe as state
 
       return (
         <div className="product-wrapper">
@@ -72,6 +71,7 @@ class ProductDisplay extends Component {
             <div
               ref={this.productDetail}
               dangerouslySetInnerHTML={{
+                //sanitize to prevent XSS attack
                 __html: sanitize(product.description),
               }}
               className="details"
@@ -82,13 +82,7 @@ class ProductDisplay extends Component {
     };
   }
 
-  componentDidMount() {
-    // const { id } = this.props.params;
-    // this.setState({ id: id });
-    //console.log(this.productDetail);
-    //const element = this.productDetail.current;
-    // element.innerHTML = this.state.description;
-  }
+  componentDidMount() {}
 
   render() {
     const { id } = this.props.params;

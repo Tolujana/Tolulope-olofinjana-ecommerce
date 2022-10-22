@@ -30,6 +30,7 @@ class Category extends Component {
             inStock={product.inStock}
             brand={product.brand}
             attribute={product.attributes}
+            id={product.id}
           />
         </Link>
       ));
