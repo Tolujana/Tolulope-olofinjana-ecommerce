@@ -10,8 +10,8 @@
 .cart-item .item-image .images {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .cart-item .item-count {
   width: 36px;

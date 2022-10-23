@@ -9,12 +9,13 @@ export class CartItem extends Component {
     this.state = {};
   }
   render() {
+    console.log(this.props);
     return (
       <div className="cart-item">
         <div className="item-desc"></div>
         <div className="item-count"></div>
         <div className="item-image">
-          <img src={image} alt="" className="images" />
+          <img src={this.props.item.image} alt="" className="images" />
         </div>
       </div>
     );
