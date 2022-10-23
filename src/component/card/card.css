@@ -68,10 +68,14 @@
   border-radius: 50%;
   background-color: #5ece7b;
   display: flex;
-  opacity: 0;
+  opacity: 1;
 }
 .card .image.wrapper .cart .basket {
   stroke: #ffffff;
+  fill: black;
+}
+.card .image.wrapper .added-to-cart {
+  background-color: red;
 }
 .card .image.wrapper .out-of-stock {
   opacity: 0.5;

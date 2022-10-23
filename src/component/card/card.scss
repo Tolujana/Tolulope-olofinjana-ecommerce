@@ -72,7 +72,11 @@
       opacity: 1;
       .basket {
         stroke: #ffffff;
+        fill: black;
       }
+    }
+    .added-to-cart {
+      background-color: red;
     }
 
     .out-of-stock {

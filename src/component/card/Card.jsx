@@ -24,26 +24,40 @@ export class Card extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { addToCart: false };
+    this.state = { isProductInCart: false };
 
     this.addItem = (e) => {
       e.preventDefault();
-      const shouldAddToCart =
+      const isProductInCart =
         this.props?.cartItem?.product?.items[this.props.id];
 
-      if (shouldAddToCart !== undefined) {
+      if (Boolean(isProductInCart)) {
         this.props.removeProduct(this.props.id);
       } else {
         const { attribute } = this.props;
-        // this is to set default attribute for product item
-        const defaultAttribute = attribute.map((attribute) => {
-          const { name, items } = attribute;
-          return { [name]: items?.displayValue };
-        });
-
+        // this is to set default attribute for product item by combining them as an objecdt
+        const defaultAttribute = attribute.reduce(
+          (combinedAttribute, attribute) => {
+            const { name, items } = attribute;
+            combinedAttribute = {
+              ...combinedAttribute,
+              [name]: items[0].displayValue,
+            };
+            return combinedAttribute;
+          },
+          {}
+        );
+        const {
+          addProduct,
+          removeProduct,
+          cartItem,
+          inStock,
+          brand,
+          ...others
+        } = this.props;
+        //payload should contain product details and default attribute so as to display on Cart Overlay
         const payload = {
-          id: this.props.id,
-          image: this.props.image,
+          product: others,
           amount: 1,
           defaultAttribute,
         };
@@ -52,10 +66,12 @@ export class Card extends Component {
       }
     };
   }
-  componentDidMount() {}
-
+  componentDidUpdate() {}
   render() {
-    console.log(this.props);
+    // const isProductInCart = Boolean(
+    //   this.props?.cartItem?.product?.items[this.props.id]
+    // );
+
     return (
       <div className="card">
         <div className="wrapper">
@@ -69,10 +85,10 @@ export class Card extends Component {
           >
             <div className="badge">{this.props.brand}</div>
             <img src={this.props.image} alt="" className="picture" />
-            <div className="cart">
+            <div className={"cart"} onClick={this.addItem}>
               <Cart
                 className="basket"
-                onClick={this.addItem}
+                style={{ fill: "blue" }}
                 value={this.state.addToCart}
               />
             </div>
