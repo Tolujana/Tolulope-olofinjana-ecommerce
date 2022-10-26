@@ -19,13 +19,23 @@ class SwatchAttribute extends Component {
 
   render() {
     const { name, id, items } = this.props.attribute;
+    const selectedAttribute = this.props?.selectedAttribute;
 
     return (
-      <div>
+      <div className={this.props.cssname}>
         <span className={id}>{name}</span>
         <div className="options">
           {items.map((item, index) => (
-            <div key={index} onClick={this.handleClick} className="option">
+            <div
+              key={index}
+              onClick={this.handleClick}
+              value={{ [name]: item.displayValue }}
+              className={
+                selectedAttribute?.[name] === item.displayValue
+                  ? ` ${name} option selected `
+                  : `${name} option  `
+              }
+            >
               <div
                 style={{
                   backgroundColor: item.displayValue,

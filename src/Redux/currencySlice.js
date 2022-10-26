@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const bagSlice = createSlice({
-  name: "counter",
+export const currencySlice = createSlice({
+  name: "currency",
   initialState: {
     value: 0,
   },
@@ -23,6 +23,7 @@ export const bagSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = bagSlice.actions;
+export const { increment, decrement, incrementByAmount } =
+  currencySlice.actions;
 
-export default bagSlice.reducer;
+export default currencySlice.reducer;

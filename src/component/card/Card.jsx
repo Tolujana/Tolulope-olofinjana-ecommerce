@@ -28,15 +28,14 @@ export class Card extends Component {
 
     this.addItem = (e) => {
       e.preventDefault();
-      const isProductInCart =
-        this.props?.cartItem?.product?.items[this.props.id];
+      const isProductInCart = this.props?.cartItem?.cart?.items[this.props.id];
 
       if (Boolean(isProductInCart)) {
         this.props.removeProduct(this.props.id);
       } else {
         const { attribute } = this.props;
-        // this is to set default attribute for product item by combining them as an objecdt
-        const defaultAttribute = attribute.reduce(
+        // this is to set a default attribute for product item by combining them as an objecdt
+        const selectedAttribute = attribute.reduce(
           (combinedAttribute, attribute) => {
             const { name, items } = attribute;
             combinedAttribute = {
@@ -57,9 +56,9 @@ export class Card extends Component {
         } = this.props;
         //payload should contain product details and default attribute so as to display on Cart Overlay
         const payload = {
-          product: others,
-          amount: 1,
-          defaultAttribute,
+          productDetails: others,
+          quantity: 1,
+          selectedAttribute,
         };
 
         this.props.addProduct(payload);

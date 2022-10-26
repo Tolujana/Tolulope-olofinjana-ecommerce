@@ -1,6 +1,5 @@
 .nav-bar {
-  position: -webkit-sticky;
-  position: sticky;
+  position: relative;
   left: 0%;
   right: 0%;
   top: 0%;
@@ -31,7 +30,8 @@
   align-items: flex-start;
   cursor: pointer;
   height: 100%;
-  padding: 0px 16px;
+  padding: 32px 16px;
+  padding-top: 0px;
   border-bottom: 2px solid transparent;
   font-style: normal;
   font-weight: 400;
@@ -45,10 +45,10 @@
 }
 .nav-bar .logo {
   position: absolute;
-  width: 41px;
-  height: 41px;
-  left: calc(50% - 20.5px);
-  top: calc(50% - 20.5px + 4.5px);
+  width: 31.18px;
+  height: 28.62px;
+  left: calc(50% - 15.59px);
+  top: calc(50% - 14.31px + 4.5px);
 }
 .nav-bar .actions {
   display: flex;

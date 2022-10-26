@@ -1,13 +1,12 @@
-.attribute-name {
+.pdp .attribute-name {
   margin-top: 43px;
 }
-
-.attribute {
+.pdp .attribute {
   margin-top: 8px;
   display: flex;
   height: 45px;
 }
-.attribute .option {
+.pdp .attribute .option {
   border: solid 1px black;
   display: flex;
   align-items: center;
@@ -17,7 +16,33 @@
   height: 100%;
   cursor: pointer;
 }
-.attribute .option.selected {
+.pdp .attribute .option.selected {
+  background-color: black;
+  color: white;
+}
+
+.cart-overlay .attribute-name {
+  margin: 8px 0px;
+}
+.cart-overlay .attribute {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  height: 20px;
+}
+.cart-overlay .attribute .option {
+  border: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  width: auto;
+  height: 20px;
+  height: 100%;
+  font-size: 14px;
+  cursor: pointer;
+}
+.cart-overlay .attribute .option.selected {
   background-color: black;
   color: white;
 }/*# sourceMappingURL=text-attribute.css.map */

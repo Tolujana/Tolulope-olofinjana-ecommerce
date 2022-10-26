@@ -11,15 +11,33 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Category from "./pages/category/Category";
 
 export class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOverlayOpen: false,
+    };
+    this.triggerOverlay = () => {
+      this.setState({ isOverlayOpen: !this.state.isOverlayOpen });
+    };
+  }
   render() {
+    console.log(this.state.isOverlayOpen);
     return (
       <>
-        <div className="wrapper"></div>
         <BrowserRouter>
-          <NavBar />
+          <NavBar
+            triggerOverlay={this.triggerOverlay}
+            overlay={this.state.isOverlayOpen}
+          />
           {/* <Card />
           <ProductDisplay />
           */}
+          <div
+            className={this.state.isOverlayOpen ? "overlay" : ""}
+            onClick={this.triggerOverlay}
+          ></div>
+
           <Routes>
             <Route path="/" element={<Category category="home" />} />
             <Route path="/category/:category" element={<Category />} />

@@ -19,6 +19,7 @@ export const getCategoryItems = gql`
         gallery
         category
         attributes {
+          type
           name
           items {
             displayValue

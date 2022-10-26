@@ -1,13 +1,14 @@
 body {
   margin: 0 auto;
   padding:0;
-  max-width: 1440px;
+  width: 1440px;
   width:100%;
-  
+  position:relative;
+
 }
 *{
-
   box-sizing:border-box;
+
   font-family: 'Raleway', sans-serif;
   color:  #1D1F22;
   -webkit-font-smoothing: antialiased;
@@ -25,4 +26,7 @@ h1{
   font-size: 32px;
   line-height: 40px;
 
+}
+#root{
+  height:100%;
 }

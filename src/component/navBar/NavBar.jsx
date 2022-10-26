@@ -16,7 +16,7 @@ export class NavBar extends Component {
     this.cartItem = React.createRef();
     this.state = {
       shouldShowSwitcher: false,
-      showCart: false,
+      showCart: this.props.overlay,
       error: false,
       loading: false,
       data: "free",
@@ -33,6 +33,7 @@ export class NavBar extends Component {
 
     this.toggleCart = (e) => {
       this.setState({ showCart: !this.state.showCart });
+      this.props.triggerOverlay();
     };
 
     this.loadData = (data) => {
@@ -51,7 +52,6 @@ export class NavBar extends Component {
       ));
     };
   }
-
   componentDidUpdate() {}
 
   render() {
@@ -71,10 +71,15 @@ export class NavBar extends Component {
             ref={this.cartItem}
             value={this.state.showCart}
           >
-            <img src={cart} alt="" className="cart" onClick={this.toggleCart} />
+            <img
+              src={cart}
+              alt=""
+              className="cart"
+              onClick={this.props.triggerOverlay}
+            />
           </div>
         </div>
-        <div className={`cart-items ${this.state.showCart ? "" : "none"}`}>
+        <div className={`cart-items ${this.props.overlay ? "" : "none"}`}>
           <CartOverlay />
         </div>
       </div>

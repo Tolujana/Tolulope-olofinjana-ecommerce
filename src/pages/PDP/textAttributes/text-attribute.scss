@@ -1,24 +1,54 @@
-.attribute-name {
-  margin-top: 43px;
-}
-
-.attribute {
-  margin-top: 8px;
-  display: flex;
-
-  height: 45px;
-  .option {
-    border: solid 1px black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 63px;
-    margin-right: 12px;
-    height: 100%;
-    cursor: pointer;
+.pdp {
+  .attribute-name {
+    margin-top: 43px;
   }
-  .option.selected {
-    background-color: black;
-    color: white;
+
+  .attribute {
+    margin-top: 8px;
+    display: flex;
+
+    height: 45px;
+    .option {
+      border: solid 1px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 63px;
+      margin-right: 12px;
+      height: 100%;
+      cursor: pointer;
+    }
+    .option.selected {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+.cart-overlay {
+  .attribute-name {
+    margin: 8px 0px;
+  }
+
+  .attribute {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    height: 20px;
+    .option {
+      border: solid 1px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      width: auto;
+      height: 20px;
+      height: 100%;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background-color: black;
+      color: white;
+    }
   }
 }

@@ -1,30 +1,64 @@
-@use "../../global";
-
-.options {
-  display: flex;
-  .grey-border {
-    border: 1px solid #cccccc;
-  }
-  .option {
+@use "../../../global" as *;
+.pdp {
+  .options {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    margin-right: 12px;
-    height: 36px;
-    cursor: pointer;
+    gap: 12px;
 
-    .content {
-      width: 32px;
-      height: 32px;
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
       cursor: pointer;
+      .grey-border {
+        border: 1px solid #cccccc;
+      }
+      .content {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+      .content .White {
+        border: 1px solid whitesmoke;
+      }
     }
-    .content .White {
-      border: 1px solid whitesmoke;
+
+    .option.selected {
+      border: 1px solid $primaryColor;
     }
   }
+}
 
-  .option.selected {
-    border: 1px solid $primaryColor;
+.cart-overlay {
+  .options {
+    display: flex;
+    gap: 8px;
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      .grey-border {
+        border: 1px solid #cccccc;
+      }
+
+      .content {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+      .content .White {
+        border: 1px solid whitesmoke;
+      }
+    }
+
+    .option.selected {
+      border: 1px solid $primaryColor;
+    }
   }
 }

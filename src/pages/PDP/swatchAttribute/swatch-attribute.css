@@ -1,26 +1,54 @@
-.options {
+.pdp .options {
   display: flex;
+  gap: 12px;
 }
-.options .grey-border {
-  border: 1px solid #cccccc;
-}
-.options .option {
+.pdp .options .option {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
-  margin-right: 12px;
   height: 36px;
   cursor: pointer;
 }
-.options .option .content {
+.pdp .options .option .grey-border {
+  border: 1px solid #cccccc;
+}
+.pdp .options .option .content {
   width: 32px;
   height: 32px;
   cursor: pointer;
 }
-.options .option .content .White {
+.pdp .options .option .content .White {
   border: 1px solid whitesmoke;
 }
-.options .option.selected {
+.pdp .options .option.selected {
+  border: 1px solid #5ece7b;
+}
+
+.cart-overlay .options {
+  display: flex;
+  gap: 8px;
+}
+.cart-overlay .options .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.cart-overlay .options .option .grey-border {
+  border: 1px solid #cccccc;
+}
+.cart-overlay .options .option .content {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.cart-overlay .options .option .content .White {
+  border: 1px solid whitesmoke;
+}
+.cart-overlay .options .option.selected {
   border: 1px solid #5ece7b;
 }/*# sourceMappingURL=swatch-attribute.css.map */

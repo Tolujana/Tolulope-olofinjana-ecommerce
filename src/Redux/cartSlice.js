@@ -10,8 +10,8 @@ export const cartSlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       const { payload } = action;
-      const { id } = payload;
-      state.items = { ...state.items, [id]: payload };
+      const { productDetails } = payload;
+      state.items = { ...state.items, [productDetails.id]: payload };
     },
     removeProduct: (state, action) => {
       // filter object based on id

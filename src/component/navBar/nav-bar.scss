@@ -1,7 +1,7 @@
 @use "../../global" as *;
 
 .nav-bar {
-  position: sticky;
+  position: relative;
   left: 0%;
   right: 0%;
   top: 0%;
@@ -30,7 +30,8 @@
         align-items: flex-start;
         cursor: pointer;
         height: 100%;
-        padding: 0px 16px;
+        padding: 32px 16px;
+        padding-top: 0px;
         border-bottom: 2px solid transparent;
         font-style: normal;
         font-weight: 400;
@@ -47,10 +48,10 @@
 
   .logo {
     position: absolute;
-    width: 41px;
-    height: 41px;
-    left: calc(50% - 41px / 2);
-    top: calc(50% - 41px / 2 + 4.5px);
+    width: 31.18px;
+    height: 28.62px;
+    left: calc(50% - 31.18px / 2);
+    top: calc(50% - 28.62px / 2 + 4.5px);
   }
 
   .actions {

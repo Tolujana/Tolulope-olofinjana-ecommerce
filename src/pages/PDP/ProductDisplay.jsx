@@ -7,6 +7,13 @@ import { getProductDetails } from "../../utils/queries";
 import { withParams } from "../../utils/HOCs";
 import TextAttribute from "./textAttributes/TextAttribute";
 import SwatchAttribute from "./swatchAttribute/SwatchAttribute";
+import { addProduct, removeProduct } from "../../Redux/cartSlice";
+
+const mapStateToProps = (state) => {
+  return {
+    cartItem: state.cart,
+  };
+};
 
 class ProductDisplay extends Component {
   constructor(props) {
@@ -14,11 +21,24 @@ class ProductDisplay extends Component {
     this.productImage = React.createRef();
     this.productDetail = React.createRef();
 
-    this.state = { id: "", displayedImage: "", description: "" };
+    this.state = {
+      id: "",
+      displayedImage: "",
+      description: "",
+      attributes: [],
+    };
 
     this.changeImage = (e) => {
       this.setState({ displayedImage: e.target.src });
     };
+
+    this.updateAttribute = (attribute) => {
+      this.setState((prev) => {
+        return { attributes: { ...prev.attributes, ...attribute } };
+      });
+    };
+
+    this.addToCart = () => {};
 
     this.loadData = (data) => {
       const { product } = data;
@@ -56,9 +76,19 @@ class ProductDisplay extends Component {
             <div className="attributes">
               {attributes.map((attribute, index) =>
                 attribute.type === "text" ? (
-                  <TextAttribute attribute={attribute} />
+                  <TextAttribute
+                    attribute={attribute}
+                    cssname="pdp"
+                    key={index}
+                    updateAttribute={this.updateAttribute}
+                  />
                 ) : (
-                  <SwatchAttribute attribute={attribute} />
+                  <SwatchAttribute
+                    attribute={attribute}
+                    cssname="pdp"
+                    key={index}
+                    updateAttribute={this.updateAttribute}
+                  />
                 )
               )}
             </div>
@@ -67,7 +97,9 @@ class ProductDisplay extends Component {
             <div className="price-value">
               {`${product.prices[0].currency.symbol} ${product.prices[0].amount}`}
             </div>
-            <button className="add-to-cart">add to cart</button>
+            <button className="buy-button" onClick={this.addToCart}>
+              add to cart
+            </button>
             <div
               ref={this.productDetail}
               dangerouslySetInnerHTML={{
@@ -85,8 +117,9 @@ class ProductDisplay extends Component {
   componentDidMount() {}
 
   render() {
-    const { id } = this.props.params;
+    console.log(this.state.attributes);
 
+    const { id } = this.props.params;
     return (
       <QueryComponent
         query={getProductDetails}
