@@ -5,15 +5,22 @@ import "./swatch-attribute.css";
 class SwatchAttribute extends Component {
   constructor(props) {
     super(props);
+    this.option = React.createRef();
+    this.state = { attribute: "", isAttributeSelected: false };
 
-    this.state = { attribute: "" };
-
-    this.handleClick = (e) => {
-      let options = document.querySelectorAll(".option");
+    this.selectAttributes = (e) => {
+      // this is to query parent container rather than document and update the css of selected option by user
+      let options = this.option.current.querySelectorAll(".option");
       options.forEach((option) => {
         option.classList.remove("selected");
       });
       e.currentTarget.classList.add("selected");
+
+      // this is to set state in PDP page based on selected attribute ( push state up)
+      const value = e.currentTarget.getAttribute("value");
+      const name = e.currentTarget.getAttribute("name");
+      this.props.updateAttribute({ [name]: value });
+      this.setState({ isAttributeSelected: true });
     };
   }
 
@@ -22,14 +29,21 @@ class SwatchAttribute extends Component {
     const selectedAttribute = this.props?.selectedAttribute;
 
     return (
-      <div className={this.props.cssname}>
-        <span className={id}>{name}</span>
-        <div className="options">
+      <div
+        className={
+          this.state.isAttributeSelected || !this.props.isError
+            ? this.props.cssname
+            : "pdp-error"
+        }
+      >
+        <span className="attribute-name">{name}</span>
+        <div ref={this.option} className="options">
           {items.map((item, index) => (
             <div
               key={index}
-              onClick={this.handleClick}
-              value={{ [name]: item.displayValue }}
+              name={name}
+              onClick={this.selectAttributes}
+              value={item.displayValue}
               className={
                 selectedAttribute?.[name] === item.displayValue
                   ? ` ${name} option selected `
@@ -46,14 +60,6 @@ class SwatchAttribute extends Component {
               ></div>
             </div>
           ))}
-          <div
-            className="color-option"
-            style={{ backgroundColor: "green" }}
-          ></div>
-          <div
-            className="color-option"
-            style={{ backgroundColor: "yellow" }}
-          ></div>
         </div>
       </div>
     );

@@ -52,3 +52,33 @@
     }
   }
 }
+.pdp-error {
+  .attribute-name {
+    color: red;
+    font-weight: 700;
+    margin-top: 43px;
+  }
+
+  .attribute {
+    margin-top: 8px;
+    display: flex;
+    border: 1.5px solid red;
+    height: 45px;
+    gap: 12px;
+    width: fit-content;
+    .option {
+      border: solid 1px red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 63px;
+      //margin-right: 12px;
+      height: 100%;
+      cursor: pointer;
+    }
+    .option.selected {
+      background-color: black;
+      color: white;
+    }
+  }
+}

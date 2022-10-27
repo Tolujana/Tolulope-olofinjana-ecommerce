@@ -8,6 +8,7 @@ import { withParams } from "../../utils/HOCs";
 import TextAttribute from "./textAttributes/TextAttribute";
 import SwatchAttribute from "./swatchAttribute/SwatchAttribute";
 import { addProduct, removeProduct } from "../../Redux/cartSlice";
+import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,6 +16,15 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  //if cart is does not include item, add item
+  const remove = (payload) => dispatch(removeProduct(payload));
+  const add = (payload) => dispatch(addProduct(payload));
+  return {
+    addProduct: add,
+    removeProduct: remove,
+  };
+};
 class ProductDisplay extends Component {
   constructor(props) {
     super(props);
@@ -24,8 +34,9 @@ class ProductDisplay extends Component {
     this.state = {
       id: "",
       displayedImage: "",
-      description: "",
-      attributes: [],
+      changeButtonMessage: false,
+      attributes: {},
+      error: [],
     };
 
     this.changeImage = (e) => {
@@ -38,14 +49,74 @@ class ProductDisplay extends Component {
       });
     };
 
-    this.addToCart = () => {};
-
     this.loadData = (data) => {
       const { product } = data;
+      console.log(product);
       const { gallery } = product;
       const { attributes } = product;
+      let error = false;
       // split product name so it can be displayed on multiple lines
       const [name, ...otherNames] = product.name.split(" ");
+
+      //this is to provide argument for this.addToCart to update State
+
+      const { inStock, brand, gallery: galleries, prices, ...others } = product;
+
+      const payload = {
+        productDetails: {
+          ...others,
+          image: gallery[0],
+          symbol: product.prices[0].currency.symbol,
+          amount: product.prices[0].amount,
+        },
+
+        quantity: 1,
+        selectedAttribute: this.state.attributes,
+      };
+
+      console.log(payload);
+
+      const addToCart = () => {
+        //  we are doing this to confirm that all attributes
+        //  have been selected if not show error
+        const { selectedAttribute } = payload;
+        let errorMessage = "Oops! you forget to select the following options ";
+
+        attributes.forEach((attribute) => {
+          if (!selectedAttribute[attribute.name]) {
+            errorMessage = errorMessage + "\n Product " + attribute.name;
+            console.log(errorMessage);
+            error = true;
+
+            //this is to the change the styling for the attribute
+            if (!this.state.error.includes(attribute.name)) {
+              this.setState((prev) => {
+                return { ...prev, error: [...prev.error, attribute.name] };
+              });
+            }
+          } else {
+            //this is to remove selected attribute if still in error array
+            if (this.state.error.includes(attribute.name)) {
+              this.setState((prev) => {
+                const index = prev.error.indexOf(attribute.name);
+                if (index > -1) {
+                  return {
+                    ...prev,
+                    error: [...prev.error].splice(index, 1),
+                  };
+                }
+              });
+            }
+          }
+        });
+
+        console.log(error);
+
+        if (!error) {
+          this.props.addProduct(payload);
+          this.setState({ changeButtonMessage: true });
+        }
+      };
 
       return (
         <div className="product-wrapper">
@@ -76,19 +147,25 @@ class ProductDisplay extends Component {
             <div className="attributes">
               {attributes.map((attribute, index) =>
                 attribute.type === "text" ? (
-                  <TextAttribute
-                    attribute={attribute}
-                    cssname="pdp"
-                    key={index}
-                    updateAttribute={this.updateAttribute}
-                  />
+                  <div className="">
+                    <TextAttribute
+                      attribute={attribute}
+                      isError={this.state.error.includes(attribute.name)}
+                      key={index}
+                      cssname="pdp"
+                      updateAttribute={this.updateAttribute}
+                    />
+                  </div>
                 ) : (
-                  <SwatchAttribute
-                    attribute={attribute}
-                    cssname="pdp"
-                    key={index}
-                    updateAttribute={this.updateAttribute}
-                  />
+                  <div>
+                    <SwatchAttribute
+                      attribute={attribute}
+                      isError={this.state.error.includes(attribute.name)}
+                      cssname="pdp"
+                      key={index}
+                      updateAttribute={this.updateAttribute}
+                    />
+                  </div>
                 )
               )}
             </div>
@@ -97,8 +174,18 @@ class ProductDisplay extends Component {
             <div className="price-value">
               {`${product.prices[0].currency.symbol} ${product.prices[0].amount}`}
             </div>
-            <button className="buy-button" onClick={this.addToCart}>
-              add to cart
+            <button
+              className="buy-button"
+              onClick={addToCart}
+              style={
+                this.state.changeButtonMessage
+                  ? { backgroundColor: "red" }
+                  : null
+              }
+            >
+              {this.state.changeButtonMessage
+                ? "Remove from Cart"
+                : "Add to cart"}
             </button>
             <div
               ref={this.productDetail}
@@ -117,7 +204,7 @@ class ProductDisplay extends Component {
   componentDidMount() {}
 
   render() {
-    console.log(this.state.attributes);
+    console.log(this.state.error);
 
     const { id } = this.props.params;
     return (
@@ -130,4 +217,7 @@ class ProductDisplay extends Component {
   }
 }
 
-export default withParams(ProductDisplay);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withParams(ProductDisplay));

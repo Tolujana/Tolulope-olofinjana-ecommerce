@@ -33,9 +33,9 @@ export class Card extends Component {
       if (Boolean(isProductInCart)) {
         this.props.removeProduct(this.props.id);
       } else {
-        const { attribute } = this.props;
+        const { attributes } = this.props;
         // this is to set a default attribute for product item by combining them as an objecdt
-        const selectedAttribute = attribute.reduce(
+        const selectedAttribute = attributes.reduce(
           (combinedAttribute, attribute) => {
             const { name, items } = attribute;
             combinedAttribute = {

@@ -51,4 +51,42 @@
 }
 .cart-overlay .options .option.selected {
   border: 1px solid #5ece7b;
+}
+
+.pdp-error .options {
+  display: flex;
+  gap: 12px;
+  border: 1.5px solid red;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.pdp-error .options .attribute-name {
+  color: red;
+  font-weight: 700;
+  margin-top: 43px;
+}
+.pdp-error .options .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 36px;
+  cursor: pointer;
+}
+.pdp-error .options .option .grey-border {
+  border: 1px solid #cccccc;
+}
+.pdp-error .options .option .content {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.pdp-error .options .option .content .White {
+  border: 1px solid whitesmoke;
+}
+.pdp-error .options .option.selected {
+  border: 1px solid #5ece7b;
 }/*# sourceMappingURL=swatch-attribute.css.map */

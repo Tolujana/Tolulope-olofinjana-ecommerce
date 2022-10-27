@@ -32,20 +32,6 @@
 .product-wrapper .product-description .size {
   margin-top: 43px;
 }
-.product-wrapper .product-description .attribute {
-  margin-top: 8px;
-  display: flex;
-  height: 45px;
-}
-.product-wrapper .product-description .attribute .option {
-  border: solid 1px black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 63px;
-  margin-right: 12px;
-  height: 100%;
-}
 .product-wrapper .product-description .color {
   margin-top: 24px;
 }

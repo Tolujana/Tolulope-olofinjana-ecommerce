@@ -24,27 +24,14 @@
     display: flex;
     flex-direction: column;
     margin-left: 100px;
+
     .sub-title {
       margin-top: 16px;
     }
     .size {
       margin-top: 43px;
     }
-    .attribute {
-      margin-top: 8px;
-      display: flex;
 
-      height: 45px;
-      .option {
-        border: solid 1px black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 63px;
-        margin-right: 12px;
-        height: 100%;
-      }
-    }
     .color {
       margin-top: 24px;
     }

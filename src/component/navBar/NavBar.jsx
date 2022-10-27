@@ -39,8 +39,12 @@ export class NavBar extends Component {
     this.loadData = (data) => {
       const { categories } = data;
 
-      return categories.map((category) => (
-        <Link className="link" to={`/category/${category.name}`}>
+      return categories.map((category, index) => (
+        <Link
+          key={category.name}
+          className="link"
+          to={`/category/${category.name}`}
+        >
           <div
             className={`menu-item ${category.name === "all" ? "active" : ""}`}
             onClick={this.switchMenu}

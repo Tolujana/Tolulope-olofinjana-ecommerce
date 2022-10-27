@@ -38,7 +38,7 @@ export class CartItem extends Component {
             {`${productDetails.symbol} ${productDetails.amount}`}
           </div>
           <div className="attributes">
-            {productDetails.attribute.map((attribute, index) =>
+            {productDetails.attributes.map((attribute, index) =>
               attribute.type === "text" ? (
                 <TextAttribute
                   attribute={attribute}

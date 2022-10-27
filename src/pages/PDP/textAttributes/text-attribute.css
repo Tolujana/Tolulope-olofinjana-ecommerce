@@ -45,4 +45,33 @@
 .cart-overlay .attribute .option.selected {
   background-color: black;
   color: white;
+}
+
+.pdp-error .attribute-name {
+  color: red;
+  font-weight: 700;
+  margin-top: 43px;
+}
+.pdp-error .attribute {
+  margin-top: 8px;
+  display: flex;
+  border: 1.5px solid red;
+  height: 45px;
+  gap: 12px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.pdp-error .attribute .option {
+  border: solid 1px red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63px;
+  height: 100%;
+  cursor: pointer;
+}
+.pdp-error .attribute .option.selected {
+  background-color: black;
+  color: white;
 }/*# sourceMappingURL=text-attribute.css.map */

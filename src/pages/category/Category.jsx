@@ -20,16 +20,15 @@ class Category extends Component {
       } = data;
 
       return products.map((product) => (
-        <Link className="link" to={`/product/${product.id}`}>
+        <Link key={product.id} className="link" to={`/product/${product.id}`}>
           <Card
-            key={product.id}
             image={product.gallery[0]}
             name={product.name}
             symbol={product.prices[0].currency.symbol}
             amount={product.prices[0].amount}
             inStock={product.inStock}
             brand={product.brand}
-            attribute={product.attributes}
+            attributes={product.attributes}
             id={product.id}
           />
         </Link>
