@@ -9,18 +9,21 @@ class SwatchAttribute extends Component {
     this.state = { attribute: "", isAttributeSelected: false };
 
     this.selectAttributes = (e) => {
-      // this is to query parent container rather than document and update the css of selected option by user
+      setStylingForSelectedAttribute(e);
+      updateStateOnProductPage(e);
+    };
+    const updateStateOnProductPage = (event) => {
+      const value = event.currentTarget.getAttribute("value");
+      const name = event.currentTarget.getAttribute("name");
+      this.props.updateAttribute({ [name]: value });
+      this.setState({ isAttributeSelected: true });
+    };
+    const setStylingForSelectedAttribute = (event) => {
       let options = this.option.current.querySelectorAll(".option");
       options.forEach((option) => {
         option.classList.remove("selected");
       });
-      e.currentTarget.classList.add("selected");
-
-      // this is to set state in PDP page based on selected attribute ( push state up)
-      const value = e.currentTarget.getAttribute("value");
-      const name = e.currentTarget.getAttribute("name");
-      this.props.updateAttribute({ [name]: value });
-      this.setState({ isAttributeSelected: true });
+      event.currentTarget.classList.add("selected");
     };
   }
 
@@ -31,9 +34,9 @@ class SwatchAttribute extends Component {
     return (
       <div
         className={
-          this.state.isAttributeSelected || !this.props.isError
-            ? this.props.cssname
-            : "pdp-error"
+          !this.state.isAttributeSelected && this.props.isError
+            ? "pdp-error"
+            : this.props.cssname
         }
       >
         <span className="attribute-name">{name}</span>

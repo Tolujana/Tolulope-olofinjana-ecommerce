@@ -80,4 +80,36 @@
     cursor: pointer;
     margin-top: 20px;
   }
+  .quantity {
+    display: flex;
+    width: 292px;
+    height: 52px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+
+    .count {
+      font-size: 52px;
+    }
+    .count-control {
+      padding: 2px;
+      background-color: $primaryColor;
+      border-radius: 2px;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    .count-control:hover {
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+
+    .decrease,
+    .increase {
+      width: 62px;
+      height: 48px;
+    }
+  }
 }

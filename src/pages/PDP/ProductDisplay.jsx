@@ -7,8 +7,14 @@ import { getProductDetails } from "../../utils/queries";
 import { withParams } from "../../utils/HOCs";
 import TextAttribute from "./textAttributes/TextAttribute";
 import SwatchAttribute from "./swatchAttribute/SwatchAttribute";
-import { addProduct, removeProduct } from "../../Redux/cartSlice";
+import {
+  addProduct,
+  removeProduct,
+  changeQuantity,
+} from "../../Redux/cartSlice";
 import { connect } from "react-redux";
+import { ReactComponent as Increase } from "../../assets/vector/Add.svg";
+import { ReactComponent as Decrease } from "../../assets/vector/takeaway.svg";
 
 const mapStateToProps = (state) => {
   return {
@@ -20,9 +26,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   //if cart is does not include item, add item
   const remove = (payload) => dispatch(removeProduct(payload));
   const add = (payload) => dispatch(addProduct(payload));
+  const increaseQuantity = (payload) => dispatch(changeQuantity(payload));
+  const decreaseQuantity = (payload) => dispatch(changeQuantity(payload));
   return {
     addProduct: add,
     removeProduct: remove,
+    increase: increaseQuantity,
+    decrease: decreaseQuantity,
   };
 };
 class ProductDisplay extends Component {
@@ -37,6 +47,7 @@ class ProductDisplay extends Component {
       changeButtonMessage: false,
       attributes: {},
       error: [],
+      addToCartIsClicked: false,
     };
 
     this.changeImage = (e) => {
@@ -49,17 +60,29 @@ class ProductDisplay extends Component {
       });
     };
 
+    const CheckErrorAndSetMessage = (attributes, selectedAttribute) => {
+      let errorMessage = "Oops! you forget to select the following options ";
+      let error = false;
+      attributes.forEach((attribute) => {
+        if (!selectedAttribute[attribute.name]) {
+          errorMessage = errorMessage + "\n Product " + attribute.name;
+          console.log(errorMessage);
+          error = true;
+        }
+      });
+      return error;
+    };
+
     this.loadData = (data) => {
       const { product } = data;
       console.log(product);
       const { gallery } = product;
-      const { attributes } = product;
-      let error = false;
+      const { attributes, id } = product;
+      const { quantity } = this.props?.cartItem?.items?.[id] || 0;
+      console.log(id);
+
       // split product name so it can be displayed on multiple lines
       const [name, ...otherNames] = product.name.split(" ");
-
-      //this is to provide argument for this.addToCart to update State
-
       const { inStock, brand, gallery: galleries, prices, ...others } = product;
 
       const payload = {
@@ -74,48 +97,26 @@ class ProductDisplay extends Component {
         selectedAttribute: this.state.attributes,
       };
 
-      console.log(payload);
+      const { selectedAttribute } = payload;
 
       const addToCart = () => {
-        //  we are doing this to confirm that all attributes
-        //  have been selected if not show error
-        const { selectedAttribute } = payload;
-        let errorMessage = "Oops! you forget to select the following options ";
-
-        attributes.forEach((attribute) => {
-          if (!selectedAttribute[attribute.name]) {
-            errorMessage = errorMessage + "\n Product " + attribute.name;
-            console.log(errorMessage);
-            error = true;
-
-            //this is to the change the styling for the attribute
-            if (!this.state.error.includes(attribute.name)) {
-              this.setState((prev) => {
-                return { ...prev, error: [...prev.error, attribute.name] };
-              });
-            }
-          } else {
-            //this is to remove selected attribute if still in error array
-            if (this.state.error.includes(attribute.name)) {
-              this.setState((prev) => {
-                const index = prev.error.indexOf(attribute.name);
-                if (index > -1) {
-                  return {
-                    ...prev,
-                    error: [...prev.error].splice(index, 1),
-                  };
-                }
-              });
-            }
-          }
-        });
-
+        this.setState({ addToCartIsClicked: true });
+        const error = CheckErrorAndSetMessage(attributes, selectedAttribute);
         console.log(error);
-
         if (!error) {
           this.props.addProduct(payload);
-          this.setState({ changeButtonMessage: true });
+          this.setState((prev) => {
+            return { ...prev, changeButtonMessage: true };
+          });
         }
+      };
+
+      const increaseQuantity = () => {
+        this.props.increase({ value: 1, id: id });
+      };
+
+      const decreaseQuantity = () => {
+        this.props.decrease({ value: -1, id: id });
       };
 
       return (
@@ -150,7 +151,7 @@ class ProductDisplay extends Component {
                   <div className="">
                     <TextAttribute
                       attribute={attribute}
-                      isError={this.state.error.includes(attribute.name)}
+                      isError={this.state.addToCartIsClicked}
                       key={index}
                       cssname="pdp"
                       updateAttribute={this.updateAttribute}
@@ -160,7 +161,7 @@ class ProductDisplay extends Component {
                   <div>
                     <SwatchAttribute
                       attribute={attribute}
-                      isError={this.state.error.includes(attribute.name)}
+                      isError={this.state.addToCartIsClicked}
                       cssname="pdp"
                       key={index}
                       updateAttribute={this.updateAttribute}
@@ -169,24 +170,25 @@ class ProductDisplay extends Component {
                 )
               )}
             </div>
-
             <span className="price">price</span>
             <div className="price-value">
               {`${product.prices[0].currency.symbol} ${product.prices[0].amount}`}
             </div>
-            <button
-              className="buy-button"
-              onClick={addToCart}
-              style={
-                this.state.changeButtonMessage
-                  ? { backgroundColor: "red" }
-                  : null
-              }
-            >
-              {this.state.changeButtonMessage
-                ? "Remove from Cart"
-                : "Add to cart"}
-            </button>
+            {this.state.changeButtonMessage && quantity > 0 ? (
+              <div className="quantity">
+                <div className="count-control">
+                  <Decrease className="decrease" onClick={decreaseQuantity} />
+                </div>
+                <div className="count">{quantity}</div>
+                <div className="count-control">
+                  <Increase className="increase" onClick={increaseQuantity} />
+                </div>
+              </div>
+            ) : (
+              <button className="buy-button" onClick={addToCart}>
+                Add to cart
+              </button>
+            )}
             <div
               ref={this.productDetail}
               dangerouslySetInnerHTML={{
@@ -204,9 +206,8 @@ class ProductDisplay extends Component {
   componentDidMount() {}
 
   render() {
-    console.log(this.state.error);
-
     const { id } = this.props.params;
+    console.log(this.props);
     return (
       <QueryComponent
         query={getProductDetails}

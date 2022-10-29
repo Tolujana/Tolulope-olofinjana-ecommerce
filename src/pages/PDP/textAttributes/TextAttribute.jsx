@@ -30,13 +30,13 @@ class TextAttribute extends Component {
   render() {
     const { name, id, items } = this.props.attribute;
     const selectedAttribute = this.props?.selectedAttribute;
-    console.log("selectedattribute", selectedAttribute);
+
     return (
       <div
         className={
-          this.state.isAttributeSelected || !this.props.isError
-            ? this.props.cssname
-            : "pdp-error"
+          !this.state.isAttributeSelected && this.props.isError
+            ? "pdp-error"
+            : this.props.cssname
         }
       >
         <div className="attribute-name">{name}</div>
