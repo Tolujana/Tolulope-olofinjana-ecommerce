@@ -5,6 +5,15 @@ import QueryComponent from "../../component/queryComponent/QueryComponent";
 import { getCategoryItems } from "../../utils/queries";
 import Card from "../../component/card/Card";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  const { currencyIndex } = state.currency;
+
+  return {
+    currencyIndex: currencyIndex,
+  };
+};
 
 class Category extends Component {
   constructor(props) {
@@ -18,14 +27,16 @@ class Category extends Component {
       const {
         category: { products },
       } = data;
-
+      const { currencyIndex } = this.props;
+      console.log(currencyIndex);
       return products.map((product) => (
         <Link key={product.id} className="link" to={`/product/${product.id}`}>
           <Card
-            image={product.gallery[0]}
+            image={product.gallery}
             name={product.name}
-            symbol={product.prices[0].currency.symbol}
-            amount={product.prices[0].amount}
+            symbol={product.prices[currencyIndex ?? 0].currency.symbol}
+            amount={product.prices[currencyIndex ?? 0].amount}
+            prices={product.prices}
             inStock={product.inStock}
             brand={product.brand}
             attributes={product.attributes}
@@ -66,4 +77,4 @@ class Category extends Component {
   }
 }
 
-export default withParams(Category);
+export default connect(mapStateToProps)(withParams(Category));
