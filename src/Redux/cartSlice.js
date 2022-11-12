@@ -19,11 +19,22 @@ export const cartSlice = createSlice({
 
       delete state.items[payload];
     },
+    updateAttribute: (state, action) => {
+      // filter object based on id
+      const { payload } = action;
+      const { selectedAttribute } = state.items[payload.id];
+
+      state.items[payload.id].selectedAttribute = {
+        ...selectedAttribute,
+        ...payload.attribute,
+      };
+      console.log(payload.attribute);
+    },
     changeQuantity: (state, action) => {
       if (action.payload.value > 0) {
         state.items[action.payload.id].quantity += 1;
       } else {
-        if (state.items[action.payload.id].quantity > 0) {
+        if (state.items[action.payload.id].quantity > 1) {
           state.items[action.payload.id].quantity -= 1;
         } else {
           delete state.items[action.payload.id];
@@ -34,6 +45,7 @@ export const cartSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addProduct, removeProduct, changeQuantity } = cartSlice.actions;
+export const { addProduct, removeProduct, changeQuantity, updateAttribute } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
