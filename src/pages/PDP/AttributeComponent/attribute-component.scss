@@ -1,0 +1,245 @@
+@use "../../../global" as *;
+
+.pdp,
+.cart-page {
+  .attribute-name {
+    margin-top: 43px;
+    font-weight: 700;
+  }
+
+  .swatch.attribute {
+    margin-top: 8px;
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+    height: fit-content;
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      .grey-border {
+        border: 1px solid #cccccc;
+      }
+      .content {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+      .content .White {
+        border: 1px solid whitesmoke;
+      }
+    }
+    .option.selected {
+      border: 1px solid $primaryColor;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .text.attribute {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+
+    .option {
+      border: solid 1px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 63px;
+
+      height: 45px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+
+.pdp-error {
+  .attribute-name {
+    color: red;
+    font-weight: 700;
+    margin-top: 43px;
+  }
+
+  .text.attribute {
+    margin-top: 8px;
+    display: flex;
+    border: 1.5px solid red;
+    width: fit-content;
+    gap: 12px;
+
+    .option {
+      border: solid 1px red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 63px;
+
+      height: 45px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background-color: black;
+      color: white;
+    }
+  }
+  .swatch.attribute {
+    margin-top: 8px;
+    display: flex;
+    border: 1.5px solid red;
+    width: fit-content;
+    gap: 12px;
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      .grey-border {
+        border: 1px solid #cccccc;
+      }
+      .content {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+      .content .White {
+        border: 1px solid whitesmoke;
+      }
+    }
+
+    .option.selected {
+      border: 1px solid $primaryColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+.cart-overlay {
+  .attribute-name {
+    margin: 8px 0px;
+  }
+
+  .text.attribute {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    height: 20px;
+    .option {
+      border: solid 1px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      width: auto;
+      height: 24px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .option.selected {
+      background-color: black;
+      color: white;
+    }
+  }
+  .swatch.attribute {
+    display: flex;
+    gap: 6px;
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      .grey-border {
+        border: 1px solid #cccccc;
+      }
+
+      .content {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+      .content .White {
+        border: 1px solid whitesmoke;
+      }
+    }
+
+    .option.selected {
+      border: 1px solid $primaryColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+.cart-page {
+  .attribute-name {
+    margin-top: 20px;
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .text.attribute {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    height: 45px;
+    .option {
+      margin-top: 7px;
+      border: solid 1px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 63px;
+      height: 100%;
+      cursor: pointer;
+    }
+    .option.selected {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  .swatch.attribute {
+    display: flex;
+    gap: 10px;
+    // width: fit-content;
+    height: fit-content;
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      .grey-border {
+        border: 1px solid #cccccc;
+      }
+      .content {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+      .content .White {
+        border: 1px solid whitesmoke;
+      }
+
+      .option.selected {
+        border: 1px solid $primaryColor;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

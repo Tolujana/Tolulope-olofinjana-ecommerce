@@ -1,0 +1,240 @@
+.pdp .attribute-name,
+.cart-page .attribute-name {
+  margin-top: 43px;
+  font-weight: 700;
+}
+.pdp .swatch.attribute,
+.cart-page .swatch.attribute {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.pdp .swatch.attribute .option,
+.cart-page .swatch.attribute .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+.pdp .swatch.attribute .option .grey-border,
+.cart-page .swatch.attribute .option .grey-border {
+  border: 1px solid #cccccc;
+}
+.pdp .swatch.attribute .option .content,
+.cart-page .swatch.attribute .option .content {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.pdp .swatch.attribute .option .content .White,
+.cart-page .swatch.attribute .option .content .White {
+  border: 1px solid whitesmoke;
+}
+.pdp .swatch.attribute .option.selected,
+.cart-page .swatch.attribute .option.selected {
+  border: 1px solid #5ece7b;
+  align-items: center;
+  justify-content: center;
+}
+.pdp .text.attribute,
+.cart-page .text.attribute {
+  margin-top: 8px;
+  display: flex;
+  gap: 12px;
+}
+.pdp .text.attribute .option,
+.cart-page .text.attribute .option {
+  border: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63px;
+  height: 45px;
+  cursor: pointer;
+}
+.pdp .text.attribute .option.selected,
+.cart-page .text.attribute .option.selected {
+  background-color: black;
+  color: white;
+}
+
+.pdp-error .attribute-name {
+  color: red;
+  font-weight: 700;
+  margin-top: 43px;
+}
+.pdp-error .text.attribute {
+  margin-top: 8px;
+  display: flex;
+  border: 1.5px solid red;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 12px;
+}
+.pdp-error .text.attribute .option {
+  border: solid 1px red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63px;
+  height: 45px;
+  cursor: pointer;
+}
+.pdp-error .text.attribute .option.selected {
+  background-color: black;
+  color: white;
+}
+.pdp-error .swatch.attribute {
+  margin-top: 8px;
+  display: flex;
+  border: 1.5px solid red;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 12px;
+}
+.pdp-error .swatch.attribute .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+.pdp-error .swatch.attribute .option .grey-border {
+  border: 1px solid #cccccc;
+}
+.pdp-error .swatch.attribute .option .content {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.pdp-error .swatch.attribute .option .content .White {
+  border: 1px solid whitesmoke;
+}
+.pdp-error .swatch.attribute .option.selected {
+  border: 1px solid #5ece7b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-overlay .attribute-name {
+  margin: 8px 0px;
+}
+.cart-overlay .text.attribute {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  height: 20px;
+}
+.cart-overlay .text.attribute .option {
+  border: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  width: auto;
+  height: 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.cart-overlay .text.attribute .option.selected {
+  background-color: black;
+  color: white;
+}
+.cart-overlay .swatch.attribute {
+  display: flex;
+  gap: 6px;
+}
+.cart-overlay .swatch.attribute .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.cart-overlay .swatch.attribute .option .grey-border {
+  border: 1px solid #cccccc;
+}
+.cart-overlay .swatch.attribute .option .content {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.cart-overlay .swatch.attribute .option .content .White {
+  border: 1px solid whitesmoke;
+}
+.cart-overlay .swatch.attribute .option.selected {
+  border: 1px solid #5ece7b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-page .attribute-name {
+  margin-top: 20px;
+  font-weight: 700;
+  display: inline-block;
+}
+.cart-page .text.attribute {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  height: 45px;
+}
+.cart-page .text.attribute .option {
+  margin-top: 7px;
+  border: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63px;
+  height: 100%;
+  cursor: pointer;
+}
+.cart-page .text.attribute .option.selected {
+  background-color: black;
+  color: white;
+}
+.cart-page .swatch.attribute {
+  display: flex;
+  gap: 10px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.cart-page .swatch.attribute .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+.cart-page .swatch.attribute .option .grey-border {
+  border: 1px solid #cccccc;
+}
+.cart-page .swatch.attribute .option .content {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.cart-page .swatch.attribute .option .content .White {
+  border: 1px solid whitesmoke;
+}
+.cart-page .swatch.attribute .option .option.selected {
+  border: 1px solid #5ece7b;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=attribute-component.css.map */

@@ -15,10 +15,14 @@ import {
 import { connect } from "react-redux";
 import { ReactComponent as Increase } from "../../assets/vector/Add.svg";
 import { ReactComponent as Decrease } from "../../assets/vector/takeaway.svg";
+import AttributeComponent from "./AttributeComponent/AttributeComponent";
 
 const mapStateToProps = (state) => {
+  console.log(state.currency);
+
   return {
     cartItem: state.cart,
+    currencyIndex: state.currency.currencyIndex,
   };
 };
 
@@ -76,23 +80,32 @@ class ProductDisplay extends Component {
     this.loadData = (data) => {
       const { product } = data;
       console.log(product);
-      const { gallery } = product;
-      const { attributes, id } = product;
-      const { quantity } = this.props?.cartItem?.items?.[id] || 0;
+      const {
+        gallery,
+        attributes,
+        id,
+        name,
+        description,
+        inStock,
+        brand,
+        prices,
+      } = product;
+      const { quantity } = this.props?.cartItem?.items?.[id] ?? 0;
+      const { currencyIndex } = this.props;
+      console.log(currencyIndex);
       console.log(id);
 
       // split product name so it can be displayed on multiple lines
-      const [name, ...otherNames] = product.name.split(" ");
-      const { inStock, brand, gallery: galleries, prices, ...others } = product;
+      const [names, ...otherNames] = name.split(" ");
 
       const payload = {
         productDetails: {
-          ...others,
+          id,
+          name,
+          attributes,
           image: gallery[0],
-          symbol: product.prices[0].currency.symbol,
-          amount: product.prices[0].amount,
+          prices: prices,
         },
-
         quantity: 1,
         selectedAttribute: this.state.attributes,
       };
@@ -118,7 +131,6 @@ class ProductDisplay extends Component {
       const decreaseQuantity = () => {
         this.props.decrease({ value: -1, id: id });
       };
-
       return (
         <div className="product-wrapper">
           <div className="product-thumbnails">
@@ -146,33 +158,45 @@ class ProductDisplay extends Component {
             <h2 className="title">{name}</h2>
             <span className="subtitle"> {otherNames.join(" ")}</span>
             <div className="attributes">
-              {attributes.map((attribute, index) =>
-                attribute.type === "text" ? (
-                  <div className="">
-                    <TextAttribute
-                      attribute={attribute}
-                      isError={this.state.addToCartIsClicked}
-                      key={index}
-                      cssname="pdp"
-                      updateAttribute={this.updateAttribute}
-                    />
-                  </div>
-                ) : (
-                  <div>
-                    <SwatchAttribute
-                      attribute={attribute}
-                      isError={this.state.addToCartIsClicked}
-                      cssname="pdp"
-                      key={index}
-                      updateAttribute={this.updateAttribute}
-                    />
-                  </div>
+              {attributes.map(
+                (attribute, index) => (
+                  <AttributeComponent
+                    attribute={attribute}
+                    isError={this.state.addToCartIsClicked}
+                    key={index}
+                    cssname="pdp"
+                    updateAttribute={this.updateAttribute}
+                  />
                 )
+
+                // attribute.type === "text" ? (
+                //   <div className="">
+                //     <TextAttribute
+                //       attribute={attribute}
+                //       isError={this.state.addToCartIsClicked}
+                //       key={index}
+                //       cssname="pdp"
+                //       updateAttribute={this.updateAttribute}
+                //     />
+                //   </div>
+                // ) : (
+                //   <div>
+                //     <SwatchAttribute
+                //       attribute={attribute}
+                //       isError={this.state.addToCartIsClicked}
+                //       cssname="pdp"
+                //       key={index}
+                //       updateAttribute={this.updateAttribute}
+                //     />
+                //   </div>
+                // )
               )}
             </div>
             <span className="price">price</span>
             <div className="price-value">
-              {`${product.prices[0].currency.symbol} ${product.prices[0].amount}`}
+              {`${product.prices[currencyIndex ?? 0].currency.symbol} ${
+                product.prices[currencyIndex ?? 0].amount
+              }`}
             </div>
             {this.state.changeButtonMessage && quantity > 0 ? (
               <div className="quantity">
@@ -193,7 +217,7 @@ class ProductDisplay extends Component {
               ref={this.productDetail}
               dangerouslySetInnerHTML={{
                 //sanitize to prevent XSS attack
-                __html: sanitize(product.description),
+                __html: sanitize(description),
               }}
               className="details"
             ></div>

@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 
-// import "./text-attribute.css";
+import "./attribute-component.css";
 
 class TextAttribute extends Component {
+  render() {
+    return <div> TextAttribute</div>;
+  }
+}
+
+class AttributeComponent extends Component {
   constructor(props) {
     super(props);
     this.option = React.createRef();
@@ -16,11 +22,11 @@ class TextAttribute extends Component {
       options.forEach((option) => {
         option.classList.remove("selected");
       });
-      e.target.classList.add("selected");
+      e.currentTarget.classList.add("selected");
 
       // this is to set state in PDP page based on selected attribute ( push state up)
-      const value = e.target.getAttribute("value");
-      const name = e.target.getAttribute("name");
+      const value = e.currentTarget.getAttribute("value");
+      const name = e.currentTarget.getAttribute("name");
       this.props.updateAttribute({ [name]: value });
       this.setState({ isAttributeSelected: true });
     };
@@ -28,7 +34,7 @@ class TextAttribute extends Component {
 
   componentDidMount() {}
   render() {
-    const { name, id, items } = this.props.attribute;
+    const { name, type, items } = this.props.attribute;
     const selectedAttribute = this.props?.selectedAttribute;
 
     return (
@@ -39,13 +45,36 @@ class TextAttribute extends Component {
             : this.props.cssname
         }
       >
-        <span className="attribute-name">{`${name} :`}</span>
-        <div ref={this.option} className={`${name} attribute`}>
-          {name !== "Size"
-            ? items.map((item) => (
+        <div className="attribute-name">{`${name}:`}</div>
+        <div ref={this.option} className={`${type} attribute`}>
+          {type === "swatch"
+            ? items.map((item, index) => (
+                <div
+                  key={index}
+                  name={name}
+                  onClick={this.selectAttributes}
+                  value={item.displayValue}
+                  className={
+                    selectedAttribute?.[name] === item.displayValue
+                      ? `option selected`
+                      : `option`
+                  }
+                >
+                  <div
+                    style={{
+                      backgroundColor: item.displayValue,
+                    }}
+                    className={`${
+                      item.displayValue === "White" ? "grey-border" : ""
+                    } content`}
+                  ></div>
+                </div>
+              ))
+            : name !== "Size"
+            ? items.map((item, index) => (
                 <div
                   onClick={this.selectAttributes}
-                  key={item.id}
+                  key={index}
                   value={item.displayValue}
                   name={name}
                   className={
@@ -57,16 +86,16 @@ class TextAttribute extends Component {
                   {item.displayValue}
                 </div>
               ))
-            : items.map((item) => (
+            : items.map((item, index) => (
                 <div
                   onClick={this.selectAttributes}
-                  key={item.id}
+                  key={index}
                   value={item.displayValue}
                   name={name}
                   className={
                     selectedAttribute?.[name] === item.displayValue
-                      ? ` ${name} option selected `
-                      : `${name} option  `
+                      ? ` ${name} text option selected `
+                      : `${name} text option  `
                   }
                 >
                   {Number(item.displayValue)
@@ -79,4 +108,4 @@ class TextAttribute extends Component {
     );
   }
 }
-export default TextAttribute;
+export default AttributeComponent;

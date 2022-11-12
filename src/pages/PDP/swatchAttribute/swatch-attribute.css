@@ -42,8 +42,8 @@
   border: 1px solid #cccccc;
 }
 .cart-overlay .options .option .content {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }
 .cart-overlay .options .option .content .White {
@@ -70,9 +70,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 36px;
   height: 36px;
   cursor: pointer;
 }
@@ -88,5 +86,37 @@
   border: 1px solid whitesmoke;
 }
 .pdp-error .options .option.selected {
+  border: 1px solid #5ece7b;
+}
+
+.cart-page .attribute-name {
+  margin-top: 20px;
+  font-weight: 700;
+  display: inline-block;
+}
+.cart-page .options {
+  display: flex;
+  gap: 6px;
+}
+.cart-page .options .option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+.cart-page .options .option .grey-border {
+  border: 1px solid #cccccc;
+}
+.cart-page .options .option .content {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.cart-page .options .option .content .White {
+  border: 1px solid whitesmoke;
+}
+.cart-page .options .option.selected {
   border: 1px solid #5ece7b;
 }/*# sourceMappingURL=swatch-attribute.css.map */

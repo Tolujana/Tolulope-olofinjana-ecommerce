@@ -14,7 +14,7 @@
       align-items: center;
       justify-content: center;
       width: 63px;
-      margin-right: 12px;
+      gap: 12px;
       height: 100%;
       cursor: pointer;
     }
@@ -73,6 +73,34 @@
       justify-content: center;
       width: 63px;
       //margin-right: 12px;
+      height: 100%;
+      cursor: pointer;
+    }
+    .option.selected {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+.cart-page {
+  .attribute-name {
+    margin-top: 20px;
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .attribute {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    height: 45px;
+    .option {
+      margin-top: 7px;
+      border: solid 1px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 63px;
       height: 100%;
       cursor: pointer;
     }

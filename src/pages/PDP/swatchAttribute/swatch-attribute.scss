@@ -48,8 +48,8 @@
       }
 
       .content {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
         cursor: pointer;
       }
       .content .White {
@@ -79,7 +79,42 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: fit-content;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      .grey-border {
+        border: 1px solid #cccccc;
+      }
+      .content {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+      .content .White {
+        border: 1px solid whitesmoke;
+      }
+    }
+
+    .option.selected {
+      border: 1px solid $primaryColor;
+    }
+  }
+}
+.cart-page {
+  .attribute-name {
+    margin-top: 20px;
+    font-weight: 700;
+    display: inline-block;
+  }
+  .options {
+    display: flex;
+    gap: 6px;
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
       height: 36px;
       cursor: pointer;
       .grey-border {
