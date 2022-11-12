@@ -83,7 +83,7 @@ export class Card extends Component {
             }`}
           >
             <div className="badge">{this.props.brand}</div>
-            <img src={this.props.image} alt="" className="picture" />
+            <img src={this.props.image[0]} alt="" className="picture" />
             <div className={"cart"} onClick={this.addItem}>
               <Cart
                 className="basket"
