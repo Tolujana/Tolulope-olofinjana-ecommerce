@@ -1,0 +1,11 @@
+.cart-checkout {
+  margin-top: 151px;
+}
+.cart-checkout details {
+  width: 1240px;
+  display: flex;
+}
+.cart-checkout .divider {
+  border-top: 1px solid #e5e5e5;
+  margin: 24px 100px;
+}/*# sourceMappingURL=cart.css.map */

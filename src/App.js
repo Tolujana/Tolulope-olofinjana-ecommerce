@@ -9,6 +9,7 @@ import ProductDisplay from "./pages/PDP/ProductDisplay";
 import { CartOverlay } from "./component/cartOverlay/CartOverlay";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Category from "./pages/category/Category";
+import Cart from "./pages/checkOutPage/Cart";
 
 export class App extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export class App extends Component {
   render() {
     console.log(this.state.isOverlayOpen);
     return (
-      <>
+      <div className="app">
         <BrowserRouter>
           <NavBar
             triggerOverlay={this.triggerOverlay}
@@ -42,9 +43,10 @@ export class App extends Component {
             <Route path="/" element={<Category category="home" />} />
             <Route path="/category/:category" element={<Category />} />
             <Route path="/product/:id" element={<ProductDisplay />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </BrowserRouter>
-      </>
+      </div>
     );
   }
 }
