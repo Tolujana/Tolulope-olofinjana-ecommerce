@@ -6,6 +6,10 @@ export const getMenuItems = gql`
     categories {
       name
     }
+    currencies {
+      label
+      symbol
+    }
   }
 `;
 
