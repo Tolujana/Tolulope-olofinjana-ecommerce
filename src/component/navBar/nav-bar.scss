@@ -8,7 +8,7 @@
   bottom: 0%;
   display: flex;
   align-items: center;
-  z-index: 1000;
+  z-index: 100;
   background-color: white;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
   height: 80px;
@@ -72,36 +72,57 @@
       cursor: pointer;
       width: 20px;
       height: 20px;
-      position: absolute;
+      //position: absolute;
       left: 184px;
       right: 0%;
-      top: 10px;
+      //top: 10px;
       bottom: 4.16%;
       order: 3;
     }
 
     .currency-switcher {
-      width: 38px;
       height: 29px;
       position: absolute;
       top: 5.5px;
       left: 124px;
       cursor: pointer;
+      z-index: 100;
       .currency-icon {
-        position: absolute;
-        left: 10px;
+        width: 36px;
+
+        //position: absolute;
+        //left: 0px;
         font-style: normal;
         font-weight: 500;
         font-size: 18px;
         line-height: 160%;
         display: flex;
-        align-items: flex-end;
+        //align-items: flex-end;
+        justify-content: center;
         color: $secondaryColor;
+      }
+      .currency-options {
+        position: absolute;
+        width: 114px;
+        height: auto;
+        top: 29px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        .currency {
+          list-style: none;
+          display: flex;
+          height: 45px;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+        .currency:hover {
+          background: #eeeeee;
+        }
       }
       .arrow-down {
         position: absolute;
-        left: 76.47%;
-        right: 20.59%;
+        right: -0px;
         top: 53.75%;
         bottom: 38.75%;
         width: 6px;
@@ -111,7 +132,7 @@
   }
   .cart-items {
     position: absolute;
-    z-index: 999;
+    z-index: 90;
     left: 1043px;
     top: 78px;
   }
