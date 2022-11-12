@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import CartItem from "./cartItem/CartItem";
 import "./cart-overlay.css";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const mapStateToProps = (state) => {
-  return {
-    cartItem: state.cart,
-  };
+  return { currencyIndex: state.currency.currencyIndex, cartItem: state.cart };
 };
 
 export class CartOverlay extends Component {
@@ -17,23 +16,44 @@ export class CartOverlay extends Component {
   }
   render() {
     console.log(this.props.cartItem);
-    const { items } = this.props.cartItem;
+    const {
+      cartItem: { items },
+      currencyIndex,
+    } = this.props;
     return (
-      <div className="cart-wrapper">
+      <div className="cart-overlay-wrapper">
         <div className="cart-details">
           <div className="my-bag">My Bag:</div>
           <div className="items">
             {Object.keys(items).map((key, index) => {
-              return <CartItem item={items[key]} key={index} />;
+              return (
+                <CartItem
+                  item={items[key]}
+                  key={index}
+                  cssname="cart-overlay"
+                />
+              );
             })}
           </div>
         </div>
         <div className="total-detail">
           <div className="total">Total</div>
-          <div className="amount">200.00</div>
+          <div className="amount">
+            {Object.keys(items).reduce((reducer, key, index) => {
+              const { prices } = items[key].productDetails;
+
+              return (
+                reducer +
+                items[key].quantity * prices[currencyIndex ?? 0].amount
+              );
+            }, 0)}
+          </div>
         </div>
         <div className="buttons">
-          <button className="view-bag">View bag</button>
+          <Link to="/cart">
+            <button className="view-bag">View bag</button>
+          </Link>
+
           <button className="check-out">Check Out</button>
         </div>
       </div>

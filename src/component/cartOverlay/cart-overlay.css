@@ -1,4 +1,4 @@
-.cart-wrapper {
+.cart-overlay-wrapper {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
   padding: 32px 16px;
   gap: 32px;
 }
-.cart-wrapper .cart-details {
+.cart-overlay-wrapper .cart-details {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -19,7 +19,7 @@
   width: 293px;
   height: 538px;
 }
-.cart-wrapper .cart-details .my-bag {
+.cart-overlay-wrapper .cart-details .my-bag {
   width: 118px;
   height: 26px;
   font-family: "Raleway";
@@ -28,7 +28,7 @@
   font-size: 16px;
   line-height: 160%;
 }
-.cart-wrapper .cart-details .items {
+.cart-overlay-wrapper .cart-details .items {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -37,14 +37,14 @@
   width: 293px;
   height: 420px;
 }
-.cart-wrapper .total-detail {
+.cart-overlay-wrapper .total-detail {
   width: 289px;
   height: 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.cart-wrapper .total-detail .total {
+.cart-overlay-wrapper .total-detail .total {
   width: 55px;
   height: 19px;
   left: 0px;
@@ -57,7 +57,7 @@
   /* or 112% */
   color: #1d1f22;
 }
-.cart-wrapper .total-detail amount {
+.cart-overlay-wrapper .total-detail amount {
   width: 95px;
   height: 26px;
   left: 194px;
@@ -72,11 +72,11 @@
   align-items: center;
   text-align: right;
 }
-.cart-wrapper .buttons {
+.cart-overlay-wrapper .buttons {
   display: flex;
   gap: 12px;
 }
-.cart-wrapper .buttons .view-bag {
+.cart-overlay-wrapper .buttons .view-bag {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,7 +88,117 @@
   background: #ffffff;
   border: 1px solid #1d1f22;
 }
-.cart-wrapper .buttons .check-out {
+.cart-overlay-wrapper .buttons .check-out {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  color: white;
+  width: 140px;
+  height: 43px;
+  cursor: pointer;
+  background: #5ece7b;
+}
+
+.cart-wrapper,
+.pdps {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 16px;
+  gap: 32px;
+}
+.cart-wrapper .cart-details,
+.pdps .cart-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+  width: 293px;
+  height: 538px;
+}
+.cart-wrapper .cart-details .my-bag,
+.pdps .cart-details .my-bag {
+  width: 118px;
+  height: 26px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+}
+.cart-wrapper .cart-details .items,
+.pdps .cart-details .items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 40px;
+  width: 293px;
+  height: 420px;
+}
+.cart-wrapper .total-detail,
+.pdps .total-detail {
+  width: 289px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cart-wrapper .total-detail .total,
+.pdps .total-detail .total {
+  width: 55px;
+  height: 19px;
+  left: 0px;
+  top: 519px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  /* or 112% */
+  color: #1d1f22;
+}
+.cart-wrapper .total-detail amount,
+.pdps .total-detail amount {
+  width: 95px;
+  height: 26px;
+  left: 194px;
+  top: 510px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+  /* identical to box height, or 26px */
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+.cart-wrapper .buttons,
+.pdps .buttons {
+  display: flex;
+  gap: 12px;
+}
+.cart-wrapper .buttons .view-bag,
+.pdps .buttons .view-bag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  cursor: pointer;
+  width: 140px;
+  height: 43px;
+  background: #ffffff;
+  border: 1px solid #1d1f22;
+}
+.cart-wrapper .buttons .check-out,
+.pdps .buttons .check-out {
   display: flex;
   flex-direction: column;
   justify-content: center;

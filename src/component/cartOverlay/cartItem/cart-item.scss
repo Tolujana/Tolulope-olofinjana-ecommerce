@@ -1,12 +1,13 @@
 @use "../../../global" as *;
 
-.cart-item {
+.cart.cart-overlay {
   border: black;
   position: relative;
   display: flex;
   width: 100%;
   height: 190px;
   background-color: white;
+
   .close-button {
     width: 20px;
     height: 20px;
@@ -28,12 +29,20 @@
   }
   .item-count {
     width: 36px;
-    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
   }
-  .item-desc {
+
+  .details {
+    display: flex;
+  }
+  .item-description {
     width: 136px;
     display: flex;
     flex-direction: column;
+    flex: 1;
 
     .title {
       width: 136px;
@@ -73,18 +82,163 @@
       line-height: 160%;
     }
   }
-  // .option {
-  //   border: solid 1px black;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   width: 63px;
-  //   margin-right: 12px;
-  //   height: 100%;
-  // }
+  .count-control {
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .increase {
+      position: absolute;
+      top: 50%;
+      width: 8px;
+    }
+    .increase-overlap {
+      height: 8px;
+    }
+    .decrease {
+      width: 8px;
+    }
+  }
+  .slider {
+    display: none;
+  }
 }
 
-.cart-item:hover {
+.cart-overlay:hover {
+  .close-button {
+    opacity: 0.9;
+  }
+}
+
+.cart.cart-page {
+  border: black;
+  position: relative;
+  display: flex;
+  height: 288px;
+  margin: 0 100px;
+  width: 1240px;
+  align-self: center;
+  // background-color: white;
+
+  .close-button {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    opacity: 0;
+    right: 0%;
+    cursor: pointer;
+    margin: 2px 2px;
+  }
+  .details {
+    display: flex;
+    width: 100%;
+  }
+  .item-image {
+    height: 288px;
+    width: 200px;
+    position: relative;
+
+    .images {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .item-count {
+    width: 69px;
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    justify-content: space-between;
+  }
+  .item-description {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .title {
+      width: 136px;
+      height: 52px;
+
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 300;
+      font-size: 30px;
+      line-height: 27px;
+      width: 136px;
+      height: 52px;
+
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 160%;
+      /* or 26px */
+
+      display: flex;
+      align-items: center;
+
+      color: $secondaryColor;
+
+      display: flex;
+      align-items: center;
+
+      color: #1d1f22;
+    }
+
+    .price {
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 160%;
+    }
+  }
+  .count-control {
+    width: 45px;
+    height: 45px;
+    border: 1px solid black;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .increase {
+      position: absolute;
+      top: 50%;
+      width: 15px;
+    }
+    .increase-overlap {
+      height: 15px;
+    }
+    .decrease {
+      width: 15px;
+    }
+  }
+  .slider {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    .caret-left,
+    .caret-right {
+      cursor: pointer;
+      display: flex;
+      background-color: black;
+      width: 20px;
+      height: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.cart.cart-page:hover {
   .close-button {
     opacity: 0.9;
   }
