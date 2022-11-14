@@ -44,6 +44,7 @@ export class CartItem extends Component {
       attributes: {},
       imagePosition: 0,
     };
+
     this.removeItem = (e) => {
       const { id } = this.props.item.productDetails;
       this.props.removeProduct(id);

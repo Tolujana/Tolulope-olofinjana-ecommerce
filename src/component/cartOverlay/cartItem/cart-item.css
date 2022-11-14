@@ -116,6 +116,7 @@
   right: 0%;
   cursor: pointer;
   margin: 2px 2px;
+  top: -4%;
 }
 .cart.cart-page .details {
   display: flex;
