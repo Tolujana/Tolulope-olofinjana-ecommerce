@@ -1,7 +1,8 @@
 .product-wrapper {
-  margin-top: 72.93px;
+  margin-top: 80px;
   max-width: 1121px;
   display: flex;
+  margin-left: 100px;
 }
 .product-wrapper .product-thumbnails {
   display: flex;
@@ -46,9 +47,19 @@
 }
 .product-wrapper .product-description .price {
   margin-top: 36px;
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
 }
 .product-wrapper .product-description .price-value {
+  font-family: "Raleway";
   margin-top: 10px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
 }
 .product-wrapper .product-description .add-to-cart {
   margin-top: 20px;

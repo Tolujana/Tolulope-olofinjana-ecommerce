@@ -1,9 +1,10 @@
 @use "../../global" as *;
 
 .product-wrapper {
-  margin-top: 72.93px;
+  margin-top: 80px;
   max-width: 1121px;
   display: flex;
+  margin-left: 100px;
   .product-thumbnails {
     display: flex;
     flex-direction: column;
@@ -46,9 +47,19 @@
     }
     .price {
       margin-top: 36px;
+      font-family: "Roboto Condensed";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 18px;
     }
     .price-value {
+      font-family: "Raleway";
       margin-top: 10px;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 18px;
     }
     .add-to-cart {
       margin-top: 20px;

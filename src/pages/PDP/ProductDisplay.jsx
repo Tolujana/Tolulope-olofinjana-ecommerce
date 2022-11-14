@@ -103,14 +103,14 @@ class ProductDisplay extends Component {
           id,
           name,
           attributes,
-          image: gallery[0],
+          image: gallery,
           prices: prices,
         },
         quantity: 1,
         selectedAttribute: this.state.attributes,
       };
-
       const { selectedAttribute } = payload;
+      console.log(payload);
 
       const addToCart = () => {
         this.setState({ addToCartIsClicked: true });
@@ -192,7 +192,7 @@ class ProductDisplay extends Component {
                 // )
               )}
             </div>
-            <span className="price">price</span>
+            <span className="price">price:</span>
             <div className="price-value">
               {`${product.prices[currencyIndex ?? 0].currency.symbol} ${
                 product.prices[currencyIndex ?? 0].amount
