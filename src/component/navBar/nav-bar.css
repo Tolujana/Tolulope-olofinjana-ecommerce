@@ -66,11 +66,27 @@
 .nav-bar .actions .empty-cart {
   cursor: pointer;
   width: 20px;
+  height: 18px;
+  position: relative;
+}
+.nav-bar .actions .empty-cart .item-count {
+  width: 20px;
   height: 20px;
-  left: 184px;
-  right: 0%;
-  bottom: 4.16%;
-  order: 3;
+  background-color: #1d1f22;
+  border-radius: 50%;
+  color: white;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  position: absolute;
+  left: 70.5%;
+  bottom: 43.75%;
 }
 .nav-bar .actions .currency-switcher {
   height: 29px;

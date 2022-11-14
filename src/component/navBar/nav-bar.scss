@@ -71,13 +71,29 @@
     .empty-cart {
       cursor: pointer;
       width: 20px;
-      height: 20px;
-      //position: absolute;
-      left: 184px;
-      right: 0%;
-      //top: 10px;
-      bottom: 4.16%;
-      order: 3;
+      height: 18px;
+      position: relative;
+
+      .item-count {
+        width: 20px;
+        height: 20px;
+        background-color: $secondaryColor;
+        border-radius: 50%;
+        color: white;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        position: absolute;
+        left: 70.5%;
+        // right: 6.11%;
+        bottom: 43.75%;
+      }
     }
 
     .currency-switcher {

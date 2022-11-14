@@ -16,6 +16,7 @@ let currencyDetails = { currencyOptions: null, defaultCurrency: null };
 const mapStateToProps = (state) => {
   return {
     currencyIndex: state.currency,
+    items: state.cart.items,
   };
 };
 
@@ -89,7 +90,7 @@ export class NavBar extends Component {
     this.loadCurrency = (data) => {
       const { currencies } = data;
       const { currencyIndex } = this.props.currencyIndex;
-      console.log(this.props);
+
       return (
         <>
           <div className="currency-icon">
@@ -117,6 +118,8 @@ export class NavBar extends Component {
   componentDidUpdate(prevProps, prevState) {}
 
   render() {
+    const { items } = this.props;
+    const ItemsKeysArray = Object.keys(items);
     return (
       <div className="nav-bar">
         <div ref={this.menu} className="menu-items">
@@ -141,6 +144,13 @@ export class NavBar extends Component {
               className="cart"
               onClick={this.props.triggerOverlay}
             />
+            <div
+              className={`${ItemsKeysArray.length > 0 ? "item-count" : "none"}`}
+            >
+              {ItemsKeysArray.reduce((reducer, key) => {
+                return reducer + items[key].quantity;
+              }, 0)}
+            </div>
           </div>
         </div>
         <div className={`cart-items ${this.props.overlay ? "" : "none"}`}>
