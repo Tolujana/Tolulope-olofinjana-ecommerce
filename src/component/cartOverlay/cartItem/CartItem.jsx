@@ -100,6 +100,7 @@ export class CartItem extends Component {
               {productDetails.attributes.map(
                 (attribute, index) => (
                   <AttributeComponent
+                    productId={id}
                     attribute={attribute}
                     cssname={this.props.cssname}
                     selectedAttribute={selectedAttribute}

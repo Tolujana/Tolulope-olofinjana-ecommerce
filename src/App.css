@@ -6,9 +6,13 @@
 .app{
     height:100%;
     position:relative;
+    display: flex;
+    flex-direction: column;
+
+    
 }
 .overlay{
-width:100%;
+width:100vw;
 background:black;
 position: absolute;
 opacity:0.6;
@@ -17,6 +21,59 @@ bottom:0px;
 left:0%;
 height:100%;
 min-height:700px;
-
 z-index: 50;
+}
+.message-wrapper{
+width: 280px;
+height:fit-content;
+padding: 10px;
+overflow: hidden;
+position:fixed;
+right:-1.5%;
+top:12%;
+}
+.message{
+
+ width: 250px;
+ height:fit-content;
+transform: translateX(250px);
+ top:150px;
+ border-radius: 4px;
+ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+ 
+}
+.text-message{
+    padding:10px;
+    padding-left:20px;
+}
+
+.indicator{background-color: green;
+    height:5px;
+}
+.red{background-color: red;}
+
+.none{
+    display:none;
+}
+
+.animate{
+    animation: showMessage 4s linear backwards; 
+
+}
+@keyframes showMessage {
+0%{transform:translateX(250px);
+   
+}
+10%{
+    transform:translateX(0px)  
+}
+90%{
+    transform:translateX(0px)  
+}
+
+100% {transform:translateX(280px)
+    
+}
+
+
 }

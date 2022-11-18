@@ -1,29 +1,69 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { useQuery, gql } from "@apollo/client";
-
 import React, { Component } from "react";
 import NavBar from "./component/navBar/NavBar";
-import Card from "./component/card/Card";
 import ProductDisplay from "./pages/PDP/ProductDisplay";
-import { CartOverlay } from "./component/cartOverlay/CartOverlay";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Category from "./pages/category/Category";
 import Cart from "./pages/checkOutPage/Cart";
+import { connect } from "react-redux";
+import { displayMessage } from "./Redux/cartSlice";
 
+const mapStateToProps = (state) => {
+  const message = state.cart.message;
+  return {
+    message: message,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  const display = (payload) => dispatch(displayMessage(payload));
+  return {
+    displayMessage: display,
+  };
+};
 export class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isOverlayOpen: false,
+      showMessage: false,
     };
+    this.messageRef = null;
+
+    this.setMessageRef = (element) => {
+      this.messageRef = element;
+    };
+
     this.triggerOverlay = () => {
       this.setState({ isOverlayOpen: !this.state.isOverlayOpen });
     };
   }
+
+  removeClass = (classname) => {
+    setTimeout(() => {
+      this.props.displayMessage({
+        message: "",
+        isError: false,
+      });
+      this.messageRef.classList.remove(classname);
+    }, 4000);
+  };
+  componentDidUpdate(prevProps) {
+    const { message } = this.props.message;
+
+    if (message !== "") {
+      const classList = this.messageRef.classList;
+      console.log(classList);
+
+      this.messageRef.classList.add("animate");
+      this.removeClass("animate");
+    }
+  }
   render() {
-    console.log(this.state.isOverlayOpen);
+    console.log(this.props.message);
+    const { message, isError } = this.props.message;
+
     return (
       <div className="app">
         <BrowserRouter>
@@ -31,14 +71,17 @@ export class App extends Component {
             triggerOverlay={this.triggerOverlay}
             overlay={this.state.isOverlayOpen}
           />
-          {/* <Card />
-          <ProductDisplay />
-          */}
+
           <div
             className={this.state.isOverlayOpen ? "overlay" : ""}
             onClick={this.triggerOverlay}
           ></div>
-
+          <div className="message-wrapper">
+            <div ref={this.setMessageRef} className="message">
+              <div className="text-message">{message}</div>
+              <div className={isError ? "red indicator" : "indicator"}></div>
+            </div>
+          </div>
           <Routes>
             <Route path="/" element={<Category category="home" />} />
             <Route path="/category/:category" element={<Category />} />
@@ -51,12 +94,4 @@ export class App extends Component {
   }
 }
 
-export default App;
-
-// function App() {
-//   return <div className="App">
-
-//   </div>;
-// }
-
-// export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
