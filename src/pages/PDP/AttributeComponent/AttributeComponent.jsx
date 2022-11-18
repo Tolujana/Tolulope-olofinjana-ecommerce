@@ -1,12 +1,20 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import { updateAttribute } from "../../../Redux/cartSlice";
 import "./attribute-component.css";
 
-class TextAttribute extends Component {
-  render() {
-    return <div> TextAttribute</div>;
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  const updateCartAttribute = (payload) => dispatch(updateAttribute(payload));
+  return {
+    updateCartAttribute,
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    cartItem: state.cart,
+  };
+};
 
 class AttributeComponent extends Component {
   constructor(props) {
@@ -14,25 +22,61 @@ class AttributeComponent extends Component {
     this.option = React.createRef();
     this.state = { attribute: "", isAttributeSelected: false };
 
-    this.selectAttributes = (e) => {
-      //query parent container  for options instead of document. this is to prevent selection of other options in other attribute
-      let options = this.option.current.querySelectorAll(`.option`);
-
-      // this is to change the styling of selected option
+    const setStylingForSelectedAttribute = (event) => {
+      let options = this.option.current.querySelectorAll(".option");
       options.forEach((option) => {
         option.classList.remove("selected");
       });
-      e.currentTarget.classList.add("selected");
+      event.currentTarget.classList.add("selected");
+    };
 
-      // this is to set state in PDP page based on selected attribute ( push state up)
-      const value = e.currentTarget.getAttribute("value");
-      const name = e.currentTarget.getAttribute("name");
+    const updateStateOnProductPageAndCart = (event) => {
+      const value = event.currentTarget.getAttribute("value");
+      const name = event.currentTarget.getAttribute("name");
+      const { productId } = this.props;
+      const isProductInCart = Boolean(this.props?.cartItem?.items[productId]);
+
+      if (isProductInCart) {
+        const payload = { attribute: { [name]: value }, id: productId };
+
+        this.props.updateCartAttribute(payload);
+      }
       this.props.updateAttribute({ [name]: value });
       this.setState({ isAttributeSelected: true });
     };
+
+    this.selectAttributes = (e) => {
+      setStylingForSelectedAttribute(e);
+      updateStateOnProductPageAndCart(e);
+    };
+
+    this.setTextforSizeAttribute = (value) => {
+      if (Number(value)) {
+        return value;
+      } else {
+        const splitValue = value.replace("Extra", "X").split(" ");
+
+        return splitValue.reduce((reducer, item) => {
+          return reducer + item[0];
+        }, "");
+      }
+    };
   }
 
-  componentDidMount() {}
+  componentDidUpdate(prevProps) {
+    //this is to update attribute on cart,cartOverlay and PDP
+    const { productId } = this.props;
+    const { name } = this.props.attribute;
+
+    const value = this.props.cartItem.items[productId]?.selectedAttribute[name];
+    const previousValue =
+      prevProps.cartItem.items[productId]?.selectedAttribute[name];
+
+    if (value !== previousValue) {
+      this.props.updateAttribute({ [name]: value });
+    }
+  }
+
   render() {
     const { name, type, items } = this.props.attribute;
     const selectedAttribute = this.props?.selectedAttribute;
@@ -98,9 +142,7 @@ class AttributeComponent extends Component {
                       : `${name} text option  `
                   }
                 >
-                  {Number(item.displayValue)
-                    ? item.displayValue
-                    : item.displayValue[0]}
+                  {this.setTextforSizeAttribute(item.displayValue)}
                 </div>
               ))}
         </div>
@@ -108,4 +150,4 @@ class AttributeComponent extends Component {
     );
   }
 }
-export default AttributeComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(AttributeComponent);

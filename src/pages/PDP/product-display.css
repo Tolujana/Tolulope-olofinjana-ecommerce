@@ -115,4 +115,21 @@
 .product-wrapper .quantity .increase {
   width: 62px;
   height: 48px;
+}
+.product-wrapper .no-cart {
+  cursor: not-allowed;
+}
+.product-wrapper .out-of-stock {
+  opacity: 0.5;
+  background-color: #ffffff;
+  position: relative;
+}
+.product-wrapper .out-of-stock .text {
+  position: absolute;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  top: 50%;
+  left: 30%;
 }/*# sourceMappingURL=product-display.css.map */

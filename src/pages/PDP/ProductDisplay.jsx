@@ -1,42 +1,42 @@
 import React, { Component } from "react";
 import { sanitize } from "dompurify";
-
 import "./product-display.css";
 import QueryComponent from "../../component/queryComponent/QueryComponent";
 import { getProductDetails } from "../../utils/queries";
 import { withParams } from "../../utils/HOCs";
-import TextAttribute from "./textAttributes/TextAttribute";
-import SwatchAttribute from "./swatchAttribute/SwatchAttribute";
-import {
-  addProduct,
-  removeProduct,
-  changeQuantity,
-} from "../../Redux/cartSlice";
 import { connect } from "react-redux";
 import { ReactComponent as Increase } from "../../assets/vector/Add.svg";
 import { ReactComponent as Decrease } from "../../assets/vector/takeaway.svg";
 import AttributeComponent from "./AttributeComponent/AttributeComponent";
 
-const mapStateToProps = (state) => {
-  console.log(state.currency);
+import {
+  addProduct,
+  removeProduct,
+  changeQuantity,
+  displayMessage,
+  updateAttribute,
+} from "../../Redux/cartSlice";
 
+const mapStateToProps = (state) => {
   return {
     cartItem: state.cart,
     currencyIndex: state.currency.currencyIndex,
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  //if cart is does not include item, add item
+const mapDispatchToProps = (dispatch) => {
+  const displayMessages = (payload) => dispatch(displayMessage(payload));
+  const updateCart = (payload) => dispatch(updateAttribute(payload));
   const remove = (payload) => dispatch(removeProduct(payload));
   const add = (payload) => dispatch(addProduct(payload));
-  const increaseQuantity = (payload) => dispatch(changeQuantity(payload));
+  const updateQuantity = (payload) => dispatch(changeQuantity(payload));
   const decreaseQuantity = (payload) => dispatch(changeQuantity(payload));
   return {
+    displayMessages,
+    updateCart,
     addProduct: add,
     removeProduct: remove,
-    increase: increaseQuantity,
-    decrease: decreaseQuantity,
+    updateQuantity,
   };
 };
 class ProductDisplay extends Component {
@@ -50,7 +50,6 @@ class ProductDisplay extends Component {
       displayedImage: "",
       changeButtonMessage: false,
       attributes: {},
-      error: [],
       addToCartIsClicked: false,
     };
 
@@ -59,27 +58,40 @@ class ProductDisplay extends Component {
     };
 
     this.updateAttribute = (attribute) => {
+      const { id } = this.props.params;
+      const isProductInCart = Boolean(this.props?.cartItem?.items[id]);
+      if (isProductInCart) {
+        const payload = { attribute, id };
+        this.props.updateCart(payload);
+      }
       this.setState((prev) => {
         return { attributes: { ...prev.attributes, ...attribute } };
       });
     };
 
     const CheckErrorAndSetMessage = (attributes, selectedAttribute) => {
-      let errorMessage = "Oops! you forget to select the following options ";
+      let errorMessage = "Oops! you forgot to select ";
       let error = false;
+
       attributes.forEach((attribute) => {
         if (!selectedAttribute[attribute.name]) {
-          errorMessage = errorMessage + "\n Product " + attribute.name;
-          console.log(errorMessage);
+          errorMessage = errorMessage + attribute.name + ", ";
           error = true;
         }
+      });
+      // remove extra comma and change last"," to "&"
+      errorMessage = errorMessage.slice(0, -1);
+
+      this.props.displayMessages({
+        message: errorMessage,
+        isError: true,
       });
       return error;
     };
 
     this.loadData = (data) => {
       const { product } = data;
-      console.log(product);
+
       const {
         gallery,
         attributes,
@@ -90,13 +102,10 @@ class ProductDisplay extends Component {
         brand,
         prices,
       } = product;
+
+      const isProductInCart = Boolean(this.props?.cartItem?.items[id]);
       const { quantity } = this.props?.cartItem?.items?.[id] ?? 0;
       const { currencyIndex } = this.props;
-      console.log(currencyIndex);
-      console.log(id);
-
-      // split product name so it can be displayed on multiple lines
-      const [names, ...otherNames] = name.split(" ");
 
       const payload = {
         productDetails: {
@@ -110,12 +119,11 @@ class ProductDisplay extends Component {
         selectedAttribute: this.state.attributes,
       };
       const { selectedAttribute } = payload;
-      console.log(payload);
 
       const addToCart = () => {
         this.setState({ addToCartIsClicked: true });
         const error = CheckErrorAndSetMessage(attributes, selectedAttribute);
-        console.log(error);
+
         if (!error) {
           this.props.addProduct(payload);
           this.setState((prev) => {
@@ -125,18 +133,21 @@ class ProductDisplay extends Component {
       };
 
       const increaseQuantity = () => {
-        this.props.increase({ value: 1, id: id });
+        this.props.updateQuantity({ value: 1, id: id });
       };
 
       const decreaseQuantity = () => {
-        this.props.decrease({ value: -1, id: id });
+        this.props.updateQuantity({ value: -1, id: id });
       };
+
+      // split product name so it can be displayed on multiple lines
+      const [firstName, ...otherNames] = name.split(" ");
+      const numberOfWordsInOtherName = otherNames.length;
       return (
         <div className="product-wrapper">
           <div className="product-thumbnails">
             {gallery.map((image, index) => (
               <img
-                value={image}
                 src={image}
                 key={index}
                 onMouseOver={this.changeImage}
@@ -145,27 +156,35 @@ class ProductDisplay extends Component {
               />
             ))}
           </div>
-
-          <div className="product-image">
-            <img
-              ref={this.productImage}
-              src={this.state.displayedImage || gallery[0]}
-              alt=""
-              className="image"
-            />
+          <div className={inStock ? "" : "out-of-stock"}>
+            <div className="text">{inStock ? "" : "OUT OF STOCK"}</div>
+            <div className="product-image">
+              <img
+                ref={this.productImage}
+                src={this.state.displayedImage || gallery[0]}
+                alt=""
+                className="image"
+              />
+            </div>
           </div>
           <div className="product-description">
-            <h2 className="title">{name}</h2>
-            <span className="subtitle"> {otherNames.join(" ")}</span>
+            <h2 className="title">
+              {numberOfWordsInOtherName > 2 ? firstName : name}
+            </h2>
+            <span className="subtitle">
+              {numberOfWordsInOtherName > 2 ? otherNames.join(" ") : ""}
+            </span>
             <div className="attributes">
               {attributes.map(
                 (attribute, index) => (
                   <AttributeComponent
                     attribute={attribute}
+                    productId={id}
                     isError={this.state.addToCartIsClicked}
                     key={index}
                     cssname="pdp"
                     updateAttribute={this.updateAttribute}
+                    selectedAttribute={this.state.attributes}
                   />
                 )
 
@@ -198,7 +217,7 @@ class ProductDisplay extends Component {
                 product.prices[currencyIndex ?? 0].amount
               }`}
             </div>
-            {this.state.changeButtonMessage && quantity > 0 ? (
+            {isProductInCart && quantity > 0 ? (
               <div className="quantity">
                 <div className="count-control">
                   <Decrease className="decrease" onClick={decreaseQuantity} />
@@ -209,7 +228,10 @@ class ProductDisplay extends Component {
                 </div>
               </div>
             ) : (
-              <button className="buy-button" onClick={addToCart}>
+              <button
+                className={inStock ? "buy-button" : "buy-button no-cart"}
+                onClick={addToCart}
+              >
                 Add to cart
               </button>
             )}
@@ -227,7 +249,16 @@ class ProductDisplay extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { id } = this.props.params;
+    const selectedAttribute =
+      this.props?.cartItem?.items[id]?.selectedAttribute;
+    console.log(selectedAttribute);
+    const isProductInCart = Boolean(selectedAttribute);
+    if (isProductInCart && selectedAttribute !== this.state.selectedAttribute) {
+      this.setState({ attributes: selectedAttribute });
+    }
+  }
 
   render() {
     const { id } = this.props.params;
