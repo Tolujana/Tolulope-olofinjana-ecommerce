@@ -60,10 +60,14 @@ class Category extends Component {
   }
 
   render() {
+    const { category } = this.state;
+    console.log(category);
     return (
       <div className="category-wrapper">
         <div className="category-name">
-          {this.state.category !== "all" ? this.state.category : ""}
+          {category !== "all"
+            ? category[0]?.toUpperCase() + category?.slice(1, category.length)
+            : ""}
         </div>
         <div className="items">
           <QueryComponent

@@ -3,6 +3,12 @@
 }
 .category-wrapper .category-name {
   margin: 80px 0px 103px 101px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 160%;
+  height: 68px;
 }
 .category-wrapper .items {
   display: flex;
