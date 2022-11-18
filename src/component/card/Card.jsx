@@ -14,6 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   //if cart is does not include item, add item
   const remove = (payload) => dispatch(removeProduct(payload));
   const add = (payload) => dispatch(addProduct(payload));
+
   return {
     addProduct: add,
     removeProduct: remove,
@@ -67,10 +68,6 @@ export class Card extends Component {
   }
   componentDidUpdate() {}
   render() {
-    // const isProductInCart = Boolean(
-    //   this.props?.cartItem?.product?.items[this.props.id]
-    // );
-
     return (
       <div className="card">
         <div className="wrapper">
@@ -84,12 +81,11 @@ export class Card extends Component {
           >
             <div className="badge">{this.props.brand}</div>
             <img src={this.props.image[0]} alt="" className="picture" />
-            <div className={"cart"} onClick={this.addItem}>
-              <Cart
-                className="basket"
-                style={{ fill: "blue" }}
-                value={this.state.addToCart}
-              />
+            <div
+              className={this.props.inStock ? "cart" : "cart no-cart"}
+              onClick={this.addItem}
+            >
+              <Cart className="basket" value={this.state.addToCart} />
             </div>
           </div>
           <div className="content">

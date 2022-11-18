@@ -77,9 +77,6 @@
 .card .image.wrapper .added-to-cart {
   background-color: red;
 }
-.card .image.wrapper .out-of-stock {
-  opacity: 0.5;
-}
 .card .image.wrapper .picture {
   height: 330px;
   width: 100%;
@@ -88,6 +85,13 @@
   -o-object-position: top;
      object-position: top;
   border-radius: 4px;
+}
+.card .out-of-stock {
+  opacity: 0.5;
+  background-color: #ffffff;
+}
+.card .no-cart {
+  cursor: not-allowed;
 }
 
 .card:hover {
