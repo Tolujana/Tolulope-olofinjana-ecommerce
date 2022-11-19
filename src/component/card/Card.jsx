@@ -6,19 +6,15 @@ import { addProduct, removeProduct } from "../../Redux/cartSlice";
 
 const mapStateToProps = (state) => {
   return {
-    cartItem: state,
+    cartItem: state.cart,
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  //if cart is does not include item, add item
-  const remove = (payload) => dispatch(removeProduct(payload));
-  const add = (payload) => dispatch(addProduct(payload));
+const mapDispatchToProps = (dispatch) => {
+  const removeProducts = (payload) => dispatch(removeProduct(payload));
+  const addProducts = (payload) => dispatch(addProduct(payload));
 
-  return {
-    addProduct: add,
-    removeProduct: remove,
-  };
+  return { addProducts, removeProducts };
 };
 
 export class Card extends Component {
@@ -27,71 +23,60 @@ export class Card extends Component {
 
     this.state = { isProductInCart: false };
 
+    this.setDefaultAttributes = (attributes) => {
+      const selectedOptionInAtrribute = attributes.reduce((combinedAttribute, attribute) => {
+        const { name, items } = attribute;
+        const value = items[0].displayValue;
+        combinedAttribute = {
+          ...combinedAttribute,
+          [name]: value,
+        };
+        return combinedAttribute;
+      }, {});
+
+      return selectedOptionInAtrribute;
+    };
+
     this.addItem = (e) => {
       e.preventDefault();
-      const isProductInCart = this.props?.cartItem?.cart?.items[this.props.id];
-
-      if (Boolean(isProductInCart)) {
-        this.props.removeProduct(this.props.id);
+      const isProductInCart = Boolean(this.props?.cartItem?.items[this.props.id]);
+      const { removeProducts, attributes, id, addProducts, cartItem, instock, brand, ...others } = this.props;
+      console.log("productin", isProductInCart);
+      if (isProductInCart) {
+        removeProducts(id);
       } else {
-        const { attributes } = this.props;
-        // this is to set a default attribute for product item by combining them as an objecdt
-        const selectedAttribute = attributes.reduce(
-          (combinedAttribute, attribute) => {
-            const { name, items } = attribute;
-            combinedAttribute = {
-              ...combinedAttribute,
-              [name]: items[0].displayValue,
-            };
-            return combinedAttribute;
-          },
-          {}
-        );
-        const {
-          addProduct,
-          removeProduct,
-          cartItem,
-          inStock,
-          brand,
-          ...others
-        } = this.props;
-        //payload should contain product details and default attribute so as to display on Cart Overlay
+        const selectedAttribute = this.setDefaultAttributes(attributes);
+
         const payload = {
-          productDetails: others,
+          productDetails: { attributes, id, ...others },
           quantity: 1,
           selectedAttribute,
         };
 
-        this.props.addProduct(payload);
+        addProducts(payload);
       }
     };
   }
   componentDidUpdate() {}
+
   render() {
+    const { inStock, brand, image, name, symbol, amount } = this.props;
+
     return (
       <div className="card">
         <div className="wrapper">
-          <div className="in-stock">
-            {this.props.inStock ? "" : "OUT OF STOCK"}
-          </div>
-          <div
-            className={`image wrapper ${
-              this.props.inStock ? "" : "out-of-stock"
-            }`}
-          >
-            <div className="badge">{this.props.brand}</div>
-            <img src={this.props.image[0]} alt="" className="picture" />
-            <div
-              className={this.props.inStock ? "cart" : "cart no-cart"}
-              onClick={this.addItem}
-            >
-              <Cart className="basket" value={this.state.addToCart} />
+          <div className="in-stock">{inStock ? "" : "OUT OF STOCK"}</div>
+          <div className={`image wrapper ${inStock ? "" : "out-of-stock"}`}>
+            <div className="badge">{brand}</div>
+            <img src={image[0]} alt="" className="picture" />
+            <div className={inStock ? "cart" : "no-cart"} onClick={this.addItem}>
+              <Cart className="basket" />
             </div>
           </div>
           <div className="content">
-            <div className="title">{this.props.name}</div>
+            <div className="title">{name}</div>
             <div className="price">
-              <span className="currency">{`${this.props.symbol} ${this.props.amount}`}</span>
+              <span className="currency">{`${symbol} ${amount}`}</span>
             </div>
           </div>
         </div>

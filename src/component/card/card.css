@@ -91,7 +91,10 @@
   background-color: #ffffff;
 }
 .card .no-cart {
-  cursor: not-allowed;
+  display: none;
+}
+.card .red {
+  background-color: red;
 }
 
 .card:hover {
