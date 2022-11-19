@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import "./cart-item.css";
 import { ReactComponent as CaretRight } from "../../../assets/vector/CaretRight.svg";
 import { ReactComponent as CaretLeft } from "../../../assets/vector/Caretleft.svg";
 import { ReactComponent as CloseButton } from "../../../assets/vector/close.svg";
+import { connect } from "react-redux";
+import { ReactComponent as Increase } from "../../../assets/vector/AddItem.svg";
+import { ReactComponent as Increase2 } from "../../../assets/vector/AddItem2.svg";
+import { ReactComponent as Decrease } from "../../../assets/vector/RemoveItem.svg";
+import AttributeComponent from "../../../pages/PDP/AttributeComponent/AttributeComponent";
+import "./cart-item.css";
 import {
   removeProduct,
   updateAttribute,
   changeQuantity,
 } from "../../../Redux/cartSlice";
-import { connect } from "react-redux";
-import { ReactComponent as Increase } from "../../../assets/vector/AddItem.svg";
-import { ReactComponent as Increase2 } from "../../../assets/vector/AddItem2.svg";
-
-import { ReactComponent as Decrease } from "../../../assets/vector/RemoveItem.svg";
-import AttributeComponent from "../../../pages/PDP/AttributeComponent/AttributeComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -21,18 +20,16 @@ const mapStateToProps = (state) => {
     cartItem: state.cart,
   };
 };
-const mapDispatchToProps = (dispatch, ownProps) => {
-  //if cart is does not include item, add item
-  const remove = (payload) => dispatch(removeProduct(payload));
+
+const mapDispatchToProps = (dispatch) => {
+  const removeProducts = (payload) => dispatch(removeProduct(payload));
   const updateCart = (payload) => dispatch(updateAttribute(payload));
-  const increaseQuantity = (payload) => dispatch(changeQuantity(payload));
-  const decreaseQuantity = (payload) => dispatch(changeQuantity(payload));
+  const updateQuantity = (payload) => dispatch(changeQuantity(payload));
 
   return {
-    removeProduct: remove,
+    removeProducts,
     updateCart,
-    increase: increaseQuantity,
-    decrease: decreaseQuantity,
+    updateQuantity,
   };
 };
 
@@ -47,7 +44,7 @@ export class CartItem extends Component {
 
     this.removeItem = (e) => {
       const { id } = this.props.item.productDetails;
-      this.props.removeProduct(id);
+      this.props.removeProducts(id);
     };
 
     this.updateAttribute = (attribute) => {
@@ -76,11 +73,11 @@ export class CartItem extends Component {
     const { id, prices, attributes, name, image } = productDetails;
     const { currencyIndex } = this.props;
     const increaseQuantity = () => {
-      this.props.increase({ value: 1, id });
+      this.props.updateQuantity({ value: 1, id });
     };
 
     const decreaseQuantity = () => {
-      this.props.decrease({ value: -1, id });
+      this.props.updateQuantity({ value: -1, id });
     };
 
     return (
