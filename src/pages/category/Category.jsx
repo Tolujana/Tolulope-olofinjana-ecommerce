@@ -28,7 +28,7 @@ class Category extends Component {
         category: { products },
       } = data;
       const { currencyIndex } = this.props;
-      console.log(currencyIndex);
+
       return products.map((product) => (
         <Link key={product.id} className="link" to={`/product/${product.id}`}>
           <Card
@@ -49,7 +49,6 @@ class Category extends Component {
 
   componentDidMount() {
     const { category } = this.props.params;
-
     this.setState({ category: category || "all" });
   }
   componentDidUpdate() {
@@ -61,20 +60,12 @@ class Category extends Component {
 
   render() {
     const { category } = this.state;
-    console.log(category);
+
     return (
       <div className="category-wrapper">
-        <div className="category-name">
-          {category !== "all"
-            ? category[0]?.toUpperCase() + category?.slice(1, category.length)
-            : ""}
-        </div>
+        <div className="category-name">{category !== "all" ? category[0]?.toUpperCase() + category?.slice(1, category.length) : ""}</div>
         <div className="items">
-          <QueryComponent
-            variables={{ input: { title: this.state.category } }}
-            query={getCategoryItems}
-            loadData={this.loadData}
-          />
+          <QueryComponent variables={{ input: { title: this.state.category } }} query={getCategoryItems} loadData={this.loadData} />
         </div>
       </div>
     );
