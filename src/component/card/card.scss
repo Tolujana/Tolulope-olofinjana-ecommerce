@@ -25,7 +25,6 @@
       width: 173px;
       left: 90px;
       top: 146px;
-
       font-style: normal;
       font-weight: 400;
       font-size: 24px;
@@ -60,7 +59,6 @@
     .cart {
       height: 52px;
       width: 52px;
-
       align-items: center;
       justify-content: center;
       position: absolute;
@@ -70,6 +68,9 @@
       background-color: $primaryColor;
       display: flex;
       opacity: 0;
+      .remove-item {
+        display: none;
+      }
       .basket {
         stroke: #ffffff;
         fill: black;
@@ -95,9 +96,6 @@
   .no-cart {
     display: none;
   }
-  .red {
-    background-color: red;
-  }
 }
 .card:hover {
   box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.19);
@@ -105,8 +103,6 @@
   .picture {
     animation: darken 0.5s both;
   }
-
-  // box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 }
 
 @keyframes darken {
@@ -118,6 +114,32 @@
     transform: scale3d(1, 1, 1);
   }
 }
-.card:hover .image.wrapper .cart {
-  opacity: 1;
+.card:hover .image.wrapper {
+  .cart {
+    opacity: 1;
+  }
+  .cart-remove {
+    opacity: 1;
+  }
+}
+
+.cart-remove {
+  background-color: red;
+  opacity: 0;
+  height: 52px;
+  width: 52px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 15px;
+  bottom: -26px;
+  border-radius: 50%;
+  background-color: red;
+  display: flex;
+
+  .remove-item {
+    position: absolute;
+    width: 30px;
+    font-weight: 100;
+  }
 }

@@ -70,6 +70,9 @@
   display: flex;
   opacity: 0;
 }
+.card .image.wrapper .cart .remove-item {
+  display: none;
+}
 .card .image.wrapper .cart .basket {
   stroke: #ffffff;
   fill: black;
@@ -92,9 +95,6 @@
 }
 .card .no-cart {
   display: none;
-}
-.card .red {
-  background-color: red;
 }
 
 .card:hover {
@@ -126,4 +126,27 @@
 }
 .card:hover .image.wrapper .cart {
   opacity: 1;
+}
+.card:hover .image.wrapper .cart-remove {
+  opacity: 1;
+}
+
+.cart-remove {
+  background-color: red;
+  opacity: 0;
+  height: 52px;
+  width: 52px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 15px;
+  bottom: -26px;
+  border-radius: 50%;
+  background-color: red;
+  display: flex;
+}
+.cart-remove .remove-item {
+  position: absolute;
+  width: 30px;
+  font-weight: 100;
 }/*# sourceMappingURL=card.css.map */

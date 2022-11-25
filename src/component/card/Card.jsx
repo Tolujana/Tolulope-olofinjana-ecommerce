@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./card.css";
 import { ReactComponent as Cart } from "../../assets/vector/cart.svg";
+import { ReactComponent as Remove } from "../../assets/vector/close.svg";
+
 import { connect } from "react-redux";
 import { addProduct, removeProduct } from "../../Redux/cartSlice";
 
@@ -20,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
 export class Card extends Component {
   constructor(props) {
     super(props);
-
+    this.menu = React.createRef();
     this.state = { isProductInCart: false };
 
     this.setDefaultAttributes = (attributes) => {
@@ -41,8 +43,9 @@ export class Card extends Component {
       e.preventDefault();
       const isProductInCart = Boolean(this.props?.cartItem?.items[this.props.id]);
       const { removeProducts, attributes, id, addProducts, cartItem, instock, brand, ...others } = this.props;
-      console.log("productin", isProductInCart);
+
       if (isProductInCart) {
+        e.currentTarget.className = "cart";
         removeProducts(id);
       } else {
         const selectedAttribute = this.setDefaultAttributes(attributes);
@@ -52,6 +55,7 @@ export class Card extends Component {
           quantity: 1,
           selectedAttribute,
         };
+        e.currentTarget.className = "cart-remove";
 
         addProducts(payload);
       }
@@ -69,14 +73,15 @@ export class Card extends Component {
           <div className={`image wrapper ${inStock ? "" : "out-of-stock"}`}>
             <div className="badge">{brand}</div>
             <img src={image[0]} alt="" className="picture" />
-            <div className={inStock ? "cart" : "no-cart"} onClick={this.addItem}>
+            <div ref={this.buttonRef} className={inStock ? "cart" : "no-cart"} onClick={this.addItem}>
               <Cart className="basket" />
+              <Remove className="remove-item" />
             </div>
           </div>
           <div className="content">
             <div className="title">{name}</div>
             <div className="price">
-              <span className="currency">{`${symbol} ${amount}`}</span>
+              <span className="currency">{`${symbol}${amount}`}</span>
             </div>
           </div>
         </div>
