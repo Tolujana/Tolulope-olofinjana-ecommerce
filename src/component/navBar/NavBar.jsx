@@ -3,15 +3,12 @@ import "./nav-bar.css";
 import cart from "../../assets/vector/cart.svg";
 import logo from "../../assets/vector/a-logo.svg";
 import arrowDown from "../../assets/vector/arrowDown.svg";
-import { Query } from "@apollo/client/react/components";
 import { getMenuItems } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import QueryComponent from "../queryComponent/QueryComponent";
 import CartOverlay from "../cartOverlay/CartOverlay";
 import { connect } from "react-redux";
 import { updateCurrency } from "../../Redux/currencySlice";
-
-let currencyDetails = { currencyOptions: null, defaultCurrency: null };
 
 const mapStateToProps = (state) => {
   return {
@@ -25,6 +22,7 @@ const mapDispatchToProps = (dispatch) => {
     updateCurrency: (payload) => dispatch(updateCurrency(payload)),
   };
 };
+
 export class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -32,14 +30,8 @@ export class NavBar extends Component {
     this.cartItem = React.createRef();
 
     this.state = {
-      shouldShowSwitcher: false,
       showCart: this.props.overlay,
-      error: false,
-      loading: false,
-      data: "free",
       shouldShowCurrency: false,
-      currencies: [],
-      currencyDetails: currencyDetails,
     };
 
     this.switchCurrency = (e) => {
@@ -49,7 +41,6 @@ export class NavBar extends Component {
     };
 
     this.switchMenu = (e) => {
-      //instead of document.queryselector, use ref.queryselector  instead
       let menuItems = this.menu.current.querySelectorAll(".menu-item");
 
       menuItems.forEach((menu) => {
@@ -71,11 +62,7 @@ export class NavBar extends Component {
       const { categories } = data;
 
       return categories?.map((category, index) => (
-        <Link
-          key={category.name}
-          className="link"
-          to={`/category/${category.name}`}
-        >
+        <Link key={category.name} className="link" to={`/category/${category.name}`}>
           <div
             className={`menu-item ${category.name === "all" ? "active" : ""}`}
             onClick={this.switchMenu}
@@ -97,11 +84,7 @@ export class NavBar extends Component {
             <div>{currencies[currencyIndex ?? 0]?.symbol}</div>
             <img src={arrowDown} alt="" className="arrow-down" />
           </div>
-          <div
-            className={`currency-options ${
-              this.state.shouldShowCurrency ? "" : "none"
-            }`}
-          >
+          <div className={`currency-options ${this.state.shouldShowCurrency ? "" : "none"}`}>
             {currencies?.map(({ symbol, label }, index) => (
               <li
                 key={index}
@@ -115,11 +98,22 @@ export class NavBar extends Component {
       );
     };
   }
-  componentDidUpdate(prevProps, prevState) {}
+  componentDidUpdate(prevProps) {
+    const { items, currencyIndex } = this.props;
+    const { items: initialItems, currencyIndex: initialCurrencyIndex } = prevProps;
+    if (initialItems !== items) {
+      localStorage.setItem("cartItems", JSON.stringify(items));
+    }
+    if (initialCurrencyIndex !== currencyIndex) {
+      localStorage.setItem("currency", JSON.stringify(currencyIndex));
+    }
+  }
 
   render() {
-    const { items } = this.props;
+    const { items, triggerOverlay } = this.props;
+    const { showCart } = this.state;
     const ItemsKeysArray = Object.keys(items);
+
     return (
       <div className="nav-bar">
         <div ref={this.menu} className="menu-items">
@@ -127,26 +121,12 @@ export class NavBar extends Component {
         </div>
         <img src={logo} alt="" className="logo" />
         <div className="actions">
-          <div
-            className="currency-switcher"
-            onClick={this.displayCurrencyOptions}
-          >
+          <div className="currency-switcher" onClick={this.displayCurrencyOptions}>
             <QueryComponent query={getMenuItems} loadData={this.loadCurrency} />
           </div>
-          <div
-            className="empty-cart"
-            ref={this.cartItem}
-            value={this.state.showCart}
-          >
-            <img
-              src={cart}
-              alt=""
-              className="cart"
-              onClick={this.props.triggerOverlay}
-            />
-            <div
-              className={`${ItemsKeysArray.length > 0 ? "item-count" : "none"}`}
-            >
+          <div className="empty-cart" ref={this.cartItem} value={showCart}>
+            <img src={cart} alt="" className="cart" onClick={triggerOverlay} />
+            <div className={`${ItemsKeysArray.length > 0 ? "item-count" : "none"}`}>
               {ItemsKeysArray.reduce((reducer, key) => {
                 return reducer + items[key].quantity;
               }, 0)}
