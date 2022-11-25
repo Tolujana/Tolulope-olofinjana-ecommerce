@@ -9,6 +9,7 @@ import { ReactComponent as Decrease } from "../../../assets/vector/RemoveItem.sv
 import AttributeComponent from "../../../pages/PDP/AttributeComponent/AttributeComponent";
 import "./cart-item.css";
 import { removeProduct, updateAttribute, changeQuantity } from "../../../Redux/cartSlice";
+import { getName } from "../../../utils/functions";
 
 const mapStateToProps = (state) => {
   return {
@@ -78,9 +79,8 @@ export class CartItem extends Component {
     const decreaseQuantity = () => {
       updateQuantity({ value: -1, id });
     };
-
-    const [firstName, ...otherNames] = name.split(" ");
-    const numberOfWords = otherNames.length;
+    const { firstName, otherNames, numberOfWords } = getName(name);
+   
 
     return (
       <div className={`cart ${cssname}`}>
