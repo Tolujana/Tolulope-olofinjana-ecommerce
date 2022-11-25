@@ -1,13 +1,36 @@
-.cart-checkout {
-  margin-top: 151px;
-  details {
-    width: 1240px;
-    display: flex;
+.cart-wrapper {
+  max-width: 1240px;
+  align-self: center;
+  align-items: stretch;
+
+  .cart-checkout {
+    margin-top: 151px;
+
+    details {
+      display: flex;
+    }
   }
   .divider {
     border-top: 1px solid #e5e5e5;
-    margin: 24px 100px;
-    //height: 1px;
-    // width: 1240px;
+    margin: 24px 0px;
+  }
+  .checkout-details {
+    align-self: flex-start;
+    width: fit-content;
+    height: 28px;
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    .value {
+      font-weight: 700;
+    }
+  }
+  .none {
+    display: none;
   }
 }

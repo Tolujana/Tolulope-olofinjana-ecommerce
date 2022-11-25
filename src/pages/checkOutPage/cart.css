@@ -1,11 +1,36 @@
-.cart-checkout {
+.cart-wrapper {
+  max-width: 1240px;
+  align-self: center;
+  align-items: stretch;
+}
+.cart-wrapper .cart-checkout {
   margin-top: 151px;
 }
-.cart-checkout details {
-  width: 1240px;
+.cart-wrapper .cart-checkout details {
   display: flex;
 }
-.cart-checkout .divider {
+.cart-wrapper .divider {
   border-top: 1px solid #e5e5e5;
-  margin: 24px 100px;
+  margin: 24px 0px;
+}
+.cart-wrapper .checkout-details {
+  align-self: flex-start;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 28px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cart-wrapper .checkout-details .value {
+  font-weight: 700;
+}
+.cart-wrapper .none {
+  display: none;
 }/*# sourceMappingURL=cart.css.map */
