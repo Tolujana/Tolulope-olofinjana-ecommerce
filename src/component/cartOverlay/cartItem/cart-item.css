@@ -3,7 +3,10 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 190px;
+  min-height: 190px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   background-color: white;
 }
 .cart.cart-overlay .close-button {
@@ -28,7 +31,7 @@
   width: 36px;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   justify-content: space-between;
 }
 .cart.cart-overlay .details {
@@ -39,6 +42,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: auto;
 }
 .cart.cart-overlay .item-description .title {
   width: 136px;
@@ -55,7 +59,6 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 160%;
-  /* or 26px */
   display: flex;
   align-items: center;
   color: #1d1f22;
@@ -103,20 +106,22 @@
   border: black;
   position: relative;
   display: flex;
-  height: 288px;
-  margin: 0 100px;
+  min-height: 288px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   width: 1240px;
-  align-self: center;
 }
 .cart.cart-page .close-button {
   width: 20px;
   height: 20px;
   position: absolute;
   opacity: 0;
-  right: 0%;
+  right: 0.5%;
   cursor: pointer;
   margin: 2px 2px;
-  top: -4%;
+  top: 0%;
+  z-index: 50;
 }
 .cart.cart-page .details {
   display: flex;
@@ -137,13 +142,14 @@
   width: 69px;
   display: flex;
   flex-direction: column;
-  align-content: start;
+  align-items: center;
   justify-content: space-between;
 }
 .cart.cart-page .item-description {
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: auto;
 }
 .cart.cart-page .item-description .title {
   width: 136px;
@@ -160,10 +166,6 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 160%;
-  /* or 26px */
-  display: flex;
-  align-items: center;
-  color: #1d1f22;
   display: flex;
   align-items: center;
   color: #1d1f22;

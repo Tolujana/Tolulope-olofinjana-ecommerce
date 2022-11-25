@@ -8,11 +8,7 @@ import { ReactComponent as Increase2 } from "../../../assets/vector/AddItem2.svg
 import { ReactComponent as Decrease } from "../../../assets/vector/RemoveItem.svg";
 import AttributeComponent from "../../../pages/PDP/AttributeComponent/AttributeComponent";
 import "./cart-item.css";
-import {
-  removeProduct,
-  updateAttribute,
-  changeQuantity,
-} from "../../../Redux/cartSlice";
+import { removeProduct, updateAttribute, changeQuantity } from "../../../Redux/cartSlice";
 
 const mapStateToProps = (state) => {
   return {
@@ -71,59 +67,38 @@ export class CartItem extends Component {
   render() {
     const { productDetails, quantity, selectedAttribute } = this.props.item;
     const { id, prices, attributes, name, image } = productDetails;
-    const { currencyIndex } = this.props;
+    const { currencyIndex, updateQuantity, cssname } = this.props;
+    const { currency, amount } = prices[currencyIndex ?? 0];
+    const { imagePosition } = this.state;
+
     const increaseQuantity = () => {
-      this.props.updateQuantity({ value: 1, id });
+      updateQuantity({ value: 1, id });
     };
 
     const decreaseQuantity = () => {
-      this.props.updateQuantity({ value: -1, id });
+      updateQuantity({ value: -1, id });
     };
 
     return (
-      <div className={`cart ${this.props.cssname}`}>
+      <div className={`cart ${cssname}`}>
         <div className="">
           <CloseButton className="close-button" onClick={this.removeItem} />
         </div>
         <div className="details">
           <div className="item-description">
             <div className="title">{name}</div>
-            <div className="price">
-              {`${prices[currencyIndex ?? 0].currency.symbol} ${
-                prices[currencyIndex ?? 0].amount
-              }`}
-            </div>
+            <div className="price">{`${currency.symbol}${amount}`}</div>
             <div className="attributes">
-              {productDetails.attributes.map(
-                (attribute, index) => (
-                  <AttributeComponent
-                    productId={id}
-                    attribute={attribute}
-                    cssname={this.props.cssname}
-                    selectedAttribute={selectedAttribute}
-                    updateAttribute={this.updateAttribute}
-                    key={`${productDetails.id} ${attribute.name} ${index}`}
-                  />
-                )
-
-                // attribute.type === "text" ? (
-                //   <TextAttribute
-                //     attribute={attribute}
-                //     cssname={this.props.cssname}
-                //     selectedAttribute={selectedAttribute}
-                //     updateAttribute={this.updateAttribute}
-                //     key={index}
-                //   />
-                // ) : (
-                //   <SwatchAttribute
-                //     attribute={attribute}
-                //     cssname={this.props.cssname}
-                //     updateAttribute={this.updateAttribute}
-                //     key={index}
-                //     selectedAttribute={selectedAttribute}
-                //   />
-                // )
-              )}
+              {attributes.map((attribute, index) => (
+                <AttributeComponent
+                  productId={id}
+                  attribute={attribute}
+                  cssname={this.props.cssname}
+                  selectedAttribute={selectedAttribute}
+                  updateAttribute={this.updateAttribute}
+                  key={`${id} ${index}`}
+                />
+              ))}
             </div>
           </div>
 
@@ -138,24 +113,12 @@ export class CartItem extends Component {
             </div>
           </div>
           <div className="item-image">
-            <img
-              src={image[this.state.imagePosition]}
-              alt=""
-              className="images"
-            />
+            <img src={image[imagePosition]} alt="" className="images" />
             <div className="slider">
-              <div
-                className="caret-left"
-                onClick={this.slideImage}
-                value={this.state.imagePosition}
-              >
+              <div className="caret-left" onClick={this.slideImage} value={imagePosition}>
                 <CaretLeft />
               </div>
-              <div
-                className="caret-right"
-                onClick={this.slideImage}
-                value={this.state.imagePosition}
-              >
+              <div className="caret-right" onClick={this.slideImage} value={imagePosition}>
                 <CaretRight />
               </div>
             </div>

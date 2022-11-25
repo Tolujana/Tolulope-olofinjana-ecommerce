@@ -15,37 +15,44 @@ export class CartOverlay extends Component {
     this.state = {};
 
     this.getTotal = (items, currencyIndex) => {
+      let symbol = null;
       const Total = Object.keys(items).reduce((reducer, key, index) => {
         const { prices } = items[key].productDetails;
         const { quantity } = items[key];
+        const { currency, amount } = prices[currencyIndex ?? 0];
+        if (symbol === null) {
+          symbol = currency.symbol;
+        }
 
-        return reducer + quantity * prices[currencyIndex ?? 0].amount;
+        return reducer + quantity * amount;
       }, 0);
 
-      return Total.toFixed(2);
+      return `${symbol ?? ""}${Total.toFixed(2)}`;
     };
 
     this.displayCartItems = (items) => {
-      const cartItem = Object.keys(items).map((key, index) => {
-        return (
-          <CartItem item={items[key]} key={index} cssname="cart-overlay" />
-        );
+      let cartItem = Object.keys(items).map((key, index) => {
+        return <CartItem item={items[key]} key={index} cssname="cart-overlay" />;
       });
       return cartItem;
     };
   }
 
   render() {
-    console.log(this.props.cartItem);
     const {
       cartItem: { items },
       currencyIndex,
     } = this.props;
+
     return (
       <div className="cart-overlay-wrapper">
         <div className="my-bag">My Bag:</div>
         <div className="cart-details">
-          <div className="items">{this.displayCartItems(items)}</div>
+          <div className="items">
+            {Object.keys(items).map((key, index) => {
+              return <CartItem item={items[key]} key={index} cssname="cart-overlay" />;
+            })}
+          </div>
         </div>
         <div className="total-detail">
           <div className="total">Total</div>
