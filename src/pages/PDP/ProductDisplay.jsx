@@ -9,13 +9,7 @@ import { ReactComponent as Increase } from "../../assets/vector/Add.svg";
 import { ReactComponent as Decrease } from "../../assets/vector/takeaway.svg";
 import AttributeComponent from "./AttributeComponent/AttributeComponent";
 
-import {
-  addProduct,
-  removeProduct,
-  changeQuantity,
-  displayMessage,
-  updateAttribute,
-} from "../../Redux/cartSlice";
+import { addProduct, removeProduct, changeQuantity, displayMessage, updateAttribute } from "../../Redux/cartSlice";
 
 const mapStateToProps = (state) => {
   return {
@@ -91,21 +85,11 @@ class ProductDisplay extends Component {
 
     this.loadData = (data) => {
       const { product } = data;
+      const { currencyIndex, cartItem } = this.props;
+      const { gallery, attributes, id, name, description, inStock, prices } = product;
 
-      const {
-        gallery,
-        attributes,
-        id,
-        name,
-        description,
-        inStock,
-        brand,
-        prices,
-      } = product;
-
-      const isProductInCart = Boolean(this.props?.cartItem?.items[id]);
-      const { quantity } = this.props?.cartItem?.items?.[id] ?? 0;
-      const { currencyIndex } = this.props;
+      const isProductInCart = Boolean(cartItem?.items[id]);
+      const { quantity } = cartItem?.items?.[id] ?? 0;
 
       const payload = {
         productDetails: {
@@ -147,75 +131,34 @@ class ProductDisplay extends Component {
         <div className="product-wrapper">
           <div className="product-thumbnails">
             {gallery.map((image, index) => (
-              <img
-                src={image}
-                key={index}
-                onMouseOver={this.changeImage}
-                alt=""
-                className="thumbnail"
-              />
+              <img src={image} key={index} onMouseOver={this.changeImage} alt="" className="thumbnail" />
             ))}
           </div>
           <div className={inStock ? "" : "out-of-stock"}>
             <div className="text">{inStock ? "" : "OUT OF STOCK"}</div>
             <div className="product-image">
-              <img
-                ref={this.productImage}
-                src={this.state.displayedImage || gallery[0]}
-                alt=""
-                className="image"
-              />
+              <img ref={this.productImage} src={this.state.displayedImage || gallery[0]} alt="" className="image" />
             </div>
           </div>
           <div className="product-description">
-            <h2 className="title">
-              {numberOfWordsInOtherName > 2 ? firstName : name}
-            </h2>
-            <span className="subtitle">
-              {numberOfWordsInOtherName > 2 ? otherNames.join(" ") : ""}
-            </span>
+            <h2 className="title">{numberOfWordsInOtherName > 2 ? firstName : name}</h2>
+            <span className="subtitle">{numberOfWordsInOtherName > 2 ? otherNames.join(" ") : ""}</span>
             <div className="attributes">
-              {attributes.map(
-                (attribute, index) => (
-                  <AttributeComponent
-                    attribute={attribute}
-                    productId={id}
-                    isError={this.state.addToCartIsClicked}
-                    key={index}
-                    cssname="pdp"
-                    updateAttribute={this.updateAttribute}
-                    selectedAttribute={this.state.attributes}
-                  />
-                )
-
-                // attribute.type === "text" ? (
-                //   <div className="">
-                //     <TextAttribute
-                //       attribute={attribute}
-                //       isError={this.state.addToCartIsClicked}
-                //       key={index}
-                //       cssname="pdp"
-                //       updateAttribute={this.updateAttribute}
-                //     />
-                //   </div>
-                // ) : (
-                //   <div>
-                //     <SwatchAttribute
-                //       attribute={attribute}
-                //       isError={this.state.addToCartIsClicked}
-                //       cssname="pdp"
-                //       key={index}
-                //       updateAttribute={this.updateAttribute}
-                //     />
-                //   </div>
-                // )
-              )}
+              {attributes.map((attribute, index) => (
+                <AttributeComponent
+                  attribute={attribute}
+                  productId={id}
+                  isError={this.state.addToCartIsClicked}
+                  key={index}
+                  cssname="pdp"
+                  updateAttribute={this.updateAttribute}
+                  selectedAttribute={this.state.attributes}
+                />
+              ))}
             </div>
             <span className="price">price:</span>
             <div className="price-value">
-              {`${product.prices[currencyIndex ?? 0].currency.symbol} ${
-                product.prices[currencyIndex ?? 0].amount
-              }`}
+              {`${prices[currencyIndex ?? 0].currency.symbol} ${prices[currencyIndex ?? 0].amount}`}
             </div>
             {isProductInCart && quantity > 0 ? (
               <div className="quantity">
@@ -228,10 +171,7 @@ class ProductDisplay extends Component {
                 </div>
               </div>
             ) : (
-              <button
-                className={inStock ? "buy-button" : "buy-button no-cart"}
-                onClick={addToCart}
-              >
+              <button className={inStock ? "buy-button" : "buy-button no-cart"} onClick={addToCart}>
                 Add to cart
               </button>
             )}
@@ -251,9 +191,7 @@ class ProductDisplay extends Component {
 
   componentDidMount() {
     const { id } = this.props.params;
-    const selectedAttribute =
-      this.props?.cartItem?.items[id]?.selectedAttribute;
-    console.log(selectedAttribute);
+    const selectedAttribute = this.props?.cartItem?.items[id]?.selectedAttribute;
     const isProductInCart = Boolean(selectedAttribute);
     if (isProductInCart && selectedAttribute !== this.state.selectedAttribute) {
       this.setState({ attributes: selectedAttribute });
@@ -262,18 +200,9 @@ class ProductDisplay extends Component {
 
   render() {
     const { id } = this.props.params;
-    console.log(this.props);
-    return (
-      <QueryComponent
-        query={getProductDetails}
-        loadData={this.loadData}
-        variables={{ id: id }}
-      />
-    );
+
+    return <QueryComponent query={getProductDetails} loadData={this.loadData} variables={{ id: id }} />;
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withParams(ProductDisplay));
+export default connect(mapStateToProps, mapDispatchToProps)(withParams(ProductDisplay));
