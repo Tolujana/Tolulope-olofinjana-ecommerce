@@ -1,24 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+const currencyIndex = JSON.parse(localStorage.getItem("currency"))?.currencyIndex || null;
 
 export const currencySlice = createSlice({
   name: "currency",
   initialState: {
-    currencyIndex: null,
+    currencyIndex: currencyIndex,
   },
   reducers: {
     updateCurrency: (state, action) => {
       state.currencyIndex = action.payload;
     },
-    removeItem: (state) => {
-      state.value -= 1;
-    },
-    UpdateItem: (state, action) => {
-      state.value += action.payload;
-    },
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { updateCurrency } = currencySlice.actions;
 
 export default currencySlice.reducer;

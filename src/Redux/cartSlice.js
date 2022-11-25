@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const initialItems = JSON.parse(localStorage.getItem("cartItems")) || {};
 export const cartSlice = createSlice({
   name: "product",
-  initialState: { items: {}, message: { message: "", isError: "" } },
+  initialState: { items: initialItems, message: { message: "", isError: "" } },
   reducers: {
     addProduct: (state, action) => {
       const { payload } = action;
@@ -14,7 +14,6 @@ export const cartSlice = createSlice({
       };
     },
     removeProduct: (state, action) => {
-      // filter object based on id
       const { payload } = action;
 
       delete state.items[payload];
@@ -24,7 +23,6 @@ export const cartSlice = createSlice({
       };
     },
     updateAttribute: (state, action) => {
-      // filter object based on id
       const { payload } = action;
       const { selectedAttribute } = state.items[payload.id];
 
@@ -32,33 +30,27 @@ export const cartSlice = createSlice({
         ...selectedAttribute,
         ...payload.attribute,
       };
-      console.log(payload.attribute);
     },
     changeQuantity: (state, action) => {
-      if (action.payload.value > 0) {
-        state.items[action.payload.id].quantity += 1;
+      const { value, id } = action.payload;
+
+      if (value > 0) {
+        state.items[id].quantity += 1;
       } else {
-        if (state.items[action.payload.id].quantity > 1) {
-          state.items[action.payload.id].quantity -= 1;
+        if (state.items[id].quantity > 1) {
+          state.items[id].quantity -= 1;
         } else {
           delete state.items[action.payload.id];
         }
       }
     },
     displayMessage: (state, action) => {
-      console.log(state.message);
       state.message = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  addProduct,
-  removeProduct,
-  changeQuantity,
-  updateAttribute,
-  displayMessage,
-} = cartSlice.actions;
+export const { addProduct, removeProduct, changeQuantity, updateAttribute, displayMessage } = cartSlice.actions;
 
 export default cartSlice.reducer;
