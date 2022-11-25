@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import CartItem from "../../component/cartOverlay/cartItem/CartItem";
 import "./cart.css";
+import { getTotal } from "../../utils/functions";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,26 +16,6 @@ export class Cart extends Component {
     super(props);
 
     this.state = {};
-
-    this.getTotal = (items, currencyIndex) => {
-      let symbol = null;
-      let totalQuantity = 0;
-
-      const total = Object.keys(items).reduce((reducer, key, index) => {
-        const { prices } = items[key].productDetails;
-        const { quantity } = items[key];
-        const { currency, amount } = prices[currencyIndex ?? 0];
-        if (symbol === null) {
-          symbol = currency.symbol;
-        }
-        totalQuantity += quantity;
-        return reducer + quantity * amount;
-      }, 0);
-      const tax = `${symbol ?? ""}${(total * 0.21).toFixed(2)}`;
-      const totalAmount = `${symbol ?? ""}${total.toFixed(2)}`;
-
-      return { tax, totalAmount, totalQuantity };
-    };
   }
 
   render() {
@@ -42,17 +23,17 @@ export class Cart extends Component {
       cartItem: { items },
       currencyIndex,
     } = this.props;
-    const { totalQuantity, tax, totalAmount } = this.getTotal(items, currencyIndex);
+    const { totalQuantity, tax, totalAmount } = getTotal(items, currencyIndex);
     return (
       <div className="cart-wrapper">
+        <div className="cart-title">CART</div>
         <div className="cart-checkout">
           {Object.keys(items).map((key, index) => {
-            const { id } = items[key].productDetails;
             return (
-              <>
+              <div key={key}>
                 <hr className="divider" />
-                <CartItem item={items[key]} key={`${id}${index} `} cssname="cart-page" />
-              </>
+                <CartItem item={items[key]} cssname="cart-page" />
+              </div>
             );
           })}
         </div>
@@ -69,6 +50,9 @@ export class Cart extends Component {
           <div className="total">
             <span className="title">Total: </span>
             <span className="value">{totalAmount}</span>
+          </div>
+          <div className="order-button">
+            <span className="title">ORDER </span>
           </div>
         </div>
       </div>

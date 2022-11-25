@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./category.css";
-import { withParams } from "../../utils/HOCs";
+import { withParams } from "../../utils/functions";
 import QueryComponent from "../../component/queryComponent/QueryComponent";
 import { getCategoryItems } from "../../utils/queries";
 import Card from "../../component/card/Card";

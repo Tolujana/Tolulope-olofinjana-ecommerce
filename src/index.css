@@ -12,8 +12,7 @@ body {
 
 *{
   box-sizing:border-box;
-
-  font-family: 'Raleway', sans-serif;
+   font-family: 'Raleway', sans-serif;
   color:  #1D1F22;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -4,7 +4,7 @@ import NavBar from "./component/navBar/NavBar";
 import ProductDisplay from "./pages/PDP/ProductDisplay";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Category from "./pages/category/Category";
-import Cart from "./pages/checkOutPage/Cart";
+import Cart from "./pages/cart/Cart";
 import { connect } from "react-redux";
 import { displayMessage } from "./Redux/cartSlice";
 

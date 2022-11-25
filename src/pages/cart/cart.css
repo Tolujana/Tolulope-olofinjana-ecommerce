@@ -1,10 +1,17 @@
 .cart-wrapper {
   max-width: 1240px;
   align-self: center;
-  align-items: stretch;
+  display: flex;
+  justify-content: flex-start;
+}
+.cart-wrapper .cart-title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  margin-top: 80px;
 }
 .cart-wrapper .cart-checkout {
-  margin-top: 151px;
+  margin-top: 55px;
 }
 .cart-wrapper .cart-checkout details {
   display: flex;
@@ -19,7 +26,6 @@
   width: -moz-fit-content;
   width: fit-content;
   height: 28px;
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
@@ -30,6 +36,24 @@
 }
 .cart-wrapper .checkout-details .value {
   font-weight: 700;
+}
+.cart-wrapper .checkout-details .order-button {
+  margin-top: 16px;
+  background-color: #5ece7b;
+  width: 279px;
+  height: 43px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+}
+.cart-wrapper .checkout-details .order-button .title {
+  color: white;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
 }
 .cart-wrapper .none {
   display: none;
