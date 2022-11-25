@@ -2,6 +2,7 @@
   max-width: 1240px;
   align-self: center;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
 }
 .cart-wrapper .cart-title {
