@@ -54,7 +54,6 @@
   line-height: 18px;
 }
 .product-wrapper .product-description .price-value {
-  font-family: "Raleway";
   margin-top: 10px;
   font-style: normal;
   font-weight: 700;
@@ -126,7 +125,6 @@
 }
 .product-wrapper .out-of-stock .text {
   position: absolute;
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 24px;

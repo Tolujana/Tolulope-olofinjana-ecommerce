@@ -3,12 +3,12 @@ import { sanitize } from "dompurify";
 import "./product-display.css";
 import QueryComponent from "../../component/queryComponent/QueryComponent";
 import { getProductDetails } from "../../utils/queries";
-import { withParams } from "../../utils/HOCs";
+import { withParams } from "../../utils/functions";
 import { connect } from "react-redux";
 import { ReactComponent as Increase } from "../../assets/vector/Add.svg";
 import { ReactComponent as Decrease } from "../../assets/vector/takeaway.svg";
 import AttributeComponent from "./AttributeComponent/AttributeComponent";
-
+import { getName } from "../../utils/functions";
 import { addProduct, removeProduct, changeQuantity, displayMessage, updateAttribute } from "../../Redux/cartSlice";
 
 const mapStateToProps = (state) => {
@@ -24,7 +24,6 @@ const mapDispatchToProps = (dispatch) => {
   const remove = (payload) => dispatch(removeProduct(payload));
   const add = (payload) => dispatch(addProduct(payload));
   const updateQuantity = (payload) => dispatch(changeQuantity(payload));
-  const decreaseQuantity = (payload) => dispatch(changeQuantity(payload));
   return {
     displayMessages,
     updateCart,
@@ -105,14 +104,18 @@ class ProductDisplay extends Component {
       const { selectedAttribute } = payload;
 
       const addToCart = () => {
-        this.setState({ addToCartIsClicked: true });
-        const error = CheckErrorAndSetMessage(attributes, selectedAttribute);
+        if (!inStock) {
+          this.props.displayMessages({ message: "Product not in stock", isError: true });
+        } else {
+          this.setState({ addToCartIsClicked: true });
+          const error = CheckErrorAndSetMessage(attributes, selectedAttribute);
 
-        if (!error) {
-          this.props.addProduct(payload);
-          this.setState((prev) => {
-            return { ...prev, changeButtonMessage: true };
-          });
+          if (!error) {
+            this.props.addProduct(payload);
+            this.setState((prev) => {
+              return { ...prev, changeButtonMessage: true };
+            });
+          }
         }
       };
 
@@ -125,8 +128,8 @@ class ProductDisplay extends Component {
       };
 
       // split product name so it can be displayed on multiple lines
-      const [firstName, ...otherNames] = name.split(" ");
-      const numberOfWordsInOtherName = otherNames.length;
+      const { firstName, otherNames, numberOfWords } = getName(name);
+
       return (
         <div className="product-wrapper">
           <div className="product-thumbnails">
@@ -141,8 +144,8 @@ class ProductDisplay extends Component {
             </div>
           </div>
           <div className="product-description">
-            <h2 className="title">{numberOfWordsInOtherName > 2 ? firstName : name}</h2>
-            <span className="subtitle">{numberOfWordsInOtherName > 2 ? otherNames.join(" ") : ""}</span>
+            <h2 className="title">{numberOfWords > 2 ? firstName : name}</h2>
+            <span className="subtitle">{numberOfWords > 2 ? otherNames.join(" ") : ""}</span>
             <div className="attributes">
               {attributes.map((attribute, index) => (
                 <AttributeComponent
