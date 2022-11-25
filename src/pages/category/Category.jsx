@@ -23,6 +23,8 @@ class Category extends Component {
       category: "",
     };
 
+    this.categoryName = (category) => {};
+
     this.loadData = (data) => {
       const {
         category: { products },
@@ -34,7 +36,7 @@ class Category extends Component {
           <Card
             image={product.gallery}
             name={product.name}
-            symbol={product.prices[currencyIndex ?? 0].currency.symbol}
+            symbol={product.prices[currencyIndex ?? 0]?.currency.symbol}
             amount={product.prices[currencyIndex ?? 0].amount}
             prices={product.prices}
             inStock={product.inStock}
@@ -60,12 +62,16 @@ class Category extends Component {
 
   render() {
     const { category } = this.state;
-
+    const categoryName = category[0]?.toUpperCase() + category?.slice(1, category.length);
     return (
       <div className="category-wrapper">
-        <div className="category-name">{category !== "all" ? category[0]?.toUpperCase() + category?.slice(1, category.length) : ""}</div>
+        <div className="category-name">{category !== "all" && categoryName}</div>
         <div className="items">
-          <QueryComponent variables={{ input: { title: this.state.category } }} query={getCategoryItems} loadData={this.loadData} />
+          <QueryComponent
+            variables={{ input: { title: category } }}
+            query={getCategoryItems}
+            loadData={this.loadData}
+          />
         </div>
       </div>
     );

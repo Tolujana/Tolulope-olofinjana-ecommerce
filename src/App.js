@@ -53,43 +53,36 @@ export class App extends Component {
     const { message } = this.props.message;
 
     if (message !== "") {
-      const classList = this.messageRef.classList;
-      console.log(classList);
-
       this.messageRef.classList.add("animate");
       this.removeClass("animate");
     }
   }
   render() {
-    console.log(this.props.message);
     const { message, isError } = this.props.message;
 
     return (
-      <div className="app">
-        <BrowserRouter>
-          <NavBar
-            triggerOverlay={this.triggerOverlay}
-            overlay={this.state.isOverlayOpen}
-          />
+      <>
+        <div className={this.state.isOverlayOpen ? "overlay" : ""} onClick={this.triggerOverlay}></div>
 
-          <div
-            className={this.state.isOverlayOpen ? "overlay" : ""}
-            onClick={this.triggerOverlay}
-          ></div>
-          <div className="message-wrapper">
-            <div ref={this.setMessageRef} className="message">
-              <div className="text-message">{message}</div>
-              <div className={isError ? "red indicator" : "indicator"}></div>
+        <div className="app">
+          <BrowserRouter>
+            <NavBar triggerOverlay={this.triggerOverlay} overlay={this.state.isOverlayOpen} />
+
+            <div className="message-wrapper">
+              <div ref={this.setMessageRef} className="message">
+                <div className="text-message">{message}</div>
+                <div className={isError ? "red indicator" : "indicator"}></div>
+              </div>
             </div>
-          </div>
-          <Routes>
-            <Route path="/" element={<Category category="home" />} />
-            <Route path="/category/:category" element={<Category />} />
-            <Route path="/product/:id" element={<ProductDisplay />} />
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+            <Routes>
+              <Route path="/" element={<Category category="home" />} />
+              <Route path="/category/:category" element={<Category />} />
+              <Route path="/product/:id" element={<ProductDisplay />} />
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </>
     );
   }
 }

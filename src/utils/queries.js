@@ -1,6 +1,5 @@
 import gql from "graphql-tag";
 
-//navigation menu
 export const getMenuItems = gql`
   {
     categories {
