@@ -79,6 +79,9 @@ export class CartItem extends Component {
       updateQuantity({ value: -1, id });
     };
 
+    const [firstName, ...otherNames] = name.split(" ");
+    const numberOfWords = otherNames.length;
+
     return (
       <div className={`cart ${cssname}`}>
         <div className="">
@@ -86,7 +89,13 @@ export class CartItem extends Component {
         </div>
         <div className="details">
           <div className="item-description">
-            <div className="title">{name}</div>
+            <div className="title">
+              <span>{numberOfWords > 2 ? firstName : name}</span>
+              <span className={numberOfWords > 2 ? "subtitle" : "none"}>
+                {numberOfWords > 2 ? otherNames.join(" ") : ""}
+              </span>
+            </div>
+
             <div className="price">{`${currency.symbol}${amount}`}</div>
             <div className="attributes">
               {attributes.map((attribute, index) => (

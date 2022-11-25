@@ -46,28 +46,24 @@
 }
 .cart.cart-overlay .item-description .title {
   width: 136px;
-  height: 52px;
-  font-family: "Raleway";
-  font-style: normal;
+  height: fit;
   font-weight: 300;
   font-size: 16px;
   line-height: 160%;
   width: 136px;
   height: 52px;
-  font-family: "Raleway";
-  font-style: normal;
+  color: #1d1f22;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.cart.cart-overlay .item-description .subtitle {
+  width: 136px;
+  height: 52px;
   font-weight: 300;
   font-size: 16px;
-  line-height: 160%;
-  display: flex;
-  align-items: center;
-  color: #1d1f22;
-  display: flex;
-  align-items: center;
-  color: #1d1f22;
 }
 .cart.cart-overlay .item-description .price {
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -152,26 +148,25 @@
   height: auto;
 }
 .cart.cart-page .item-description .title {
-  width: 136px;
-  height: 52px;
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 300;
+  width: 292px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-weight: 600;
   font-size: 30px;
   line-height: 27px;
-  width: 136px;
-  height: 52px;
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 160%;
-  display: flex;
-  align-items: center;
   color: #1d1f22;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.cart.cart-page .item-description .subtitle {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
 }
 .cart.cart-page .item-description .price {
-  font-family: "Raleway";
+  margin-top: 20px;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -218,4 +213,8 @@
 
 .cart.cart-page:hover .close-button {
   opacity: 0.9;
+}
+
+.none {
+  display: none;
 }/*# sourceMappingURL=cart-item.css.map */

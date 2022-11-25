@@ -59,7 +59,7 @@ export class CartOverlay extends Component {
           <div className="amount">{this.getTotal(items, currencyIndex)}</div>
         </div>
         <div className="buttons">
-          <Link to="/cart">
+          <Link to="/cart" className="link">
             <button className="view-bag">View bag</button>
           </Link>
 

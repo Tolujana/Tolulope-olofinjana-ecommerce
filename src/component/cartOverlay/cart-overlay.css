@@ -10,11 +10,13 @@
   padding: 32px 16px;
   gap: 32px;
 }
+.cart-overlay-wrapper .link {
+  text-decoration: none;
+}
 .cart-overlay-wrapper .my-bag {
   width: 118px;
   height: 26px;
   align-self: flex-start;
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -59,7 +61,6 @@
 .cart-overlay-wrapper .total-detail .amount {
   width: 95px;
   height: 26px;
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
